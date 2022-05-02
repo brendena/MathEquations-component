@@ -1,11 +1,9 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
-//import * as MathJax from "mathjax/es5/core.js"
-
-
+import React from 'react';
+import { AppContext } from "../context";
 
 const MathTextInput: React.FC = () => {
-
-
+  const { state ,dispatch } = React.useContext(AppContext);
+  console.log(state.EquationProps.text)
   return (
     <>
         <textarea id="inputTextMathEquation" 

@@ -1,9 +1,9 @@
 import React, { FC, useContext, useEffect, useRef } from 'react';
 import { EventContext, Styled } from 'direflow-component';
 import styles from './App.css';
-import MathJaxViewer from './math-jax-viewer'
-import MathTextInput from './math-text-input'
-
+import MathJaxViewer from './components/math-jax-viewer'
+import MathTextInput from './components/math-text-input'
+import { AppProvider } from "./context";
 
 interface IProps {
   componentTitle: string;
@@ -36,29 +36,33 @@ const App: FC<IProps> = (props) => {
 
 
   return (
-    <Styled styles={styles}>
-      <div>
-        <div id="appSpacer"></div>
-        <div id="mathExtensionGrid" className={"vertical"} ref={ref}>
-          <div id="textInputContainer">
-            <MathTextInput></MathTextInput>
-          </div>
-          <div id="textOutput">
-            <MathJaxViewer></MathJaxViewer>
-          </div>
-          <div id="selectLanguage">bottom left</div>
-          <div id="otherSettings">bottom right</div>
 
-          
-          <img id="handle" 
-              src="resizeIcon.svg"
-              alt="triangle with all three sides equal"
-              draggable={false}
-              onMouseDown={()=>{mouseResizeStart()}}
-              />
-        </div>
-      </div>
-    </Styled>
+    <AppProvider>
+      <Styled styles={styles}>
+          <div>
+            <div id="appSpacer"></div>
+            <div id="mathExtensionGrid" className={"vertical"} ref={ref}>
+              <div id="textInputContainer">
+                <MathTextInput></MathTextInput>
+              </div>
+              <div id="textOutput">
+                <MathJaxViewer></MathJaxViewer>
+              </div>
+              <div id="selectLanguage">bottom left</div>
+              <div id="otherSettings">bottom right</div>
+
+              
+              <img id="handle" 
+                  src="resizeIcon.svg"
+                  alt="triangle with all three sides equal"
+                  draggable={false}
+                  onMouseDown={()=>{mouseResizeStart()}}
+                  />
+            </div>
+          </div>
+        
+      </Styled>
+    </AppProvider>
   );
 };
 
