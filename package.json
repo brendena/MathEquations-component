@@ -1,0 +1,81 @@
+{
+  "name": "math-equation-component",
+  "description": "This project is created using Direflow",
+  "version": "1.0.0",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "direflow",
+    "react",
+    "webcomponent"
+  ],
+  "homepage": "https://direflow.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Silind-Software/direflow"
+  },
+  "bugs": {
+    "email": "direflow@silind.com",
+    "url": "https://github.com/Silind-Software/direflow/issues/new"
+  },
+  "main": "build/direflowBundle.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "start": "direflow-scripts start",
+    "build": "direflow-scripts build",
+    "build:lib": "direflow-scripts build:lib",
+    "test": "direflow-scripts test"
+  },
+  "dependencies": {
+    "@types/node": "12.7.8",
+    "@types/react": "16.9.3",
+    "@types/react-dom": "16.9.1",
+    "better-react-mathjax": "^2.0.1",
+    "direflow-component": "3.5.5",
+    "direflow-scripts": "3.5.5",
+    "install": "^0.13.0",
+    "mathjax": "^3.2.0",
+    "mathjax-full": "^3.2.0",
+    "npm": "^8.8.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.1"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "@types/react-test-renderer": "16.9.1",
+    "jest-environment-jsdom-fourteen": "0.1.0",
+    "react-app-rewired": "2.1.3",
+    "react-test-renderer": "16.9.0",
+    "to-string-loader": "^1.1.6",
+    "ts-loader": "^6.2.2",
+    "tslint": "5.20.0",
+    "tslint-config-airbnb": "5.11.2",
+    "tslint-react": "4.1.0",
+    "typescript": "^3.9.3",
+    "webpack-cli": "^3.3.11"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "direflow-scripts/direflow-jest.config.js"
+    ]
+  },
+  "config-overrides-path": "direflow-webpack.js"
+}
