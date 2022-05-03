@@ -1,3 +1,5 @@
+import * as Enums from "./conts/enums"
+
 type ActionMap<M extends { [index: string]: any }> = {
     [Key in keyof M]: M[Key] extends undefined
       ? {
@@ -10,51 +12,37 @@ type ActionMap<M extends { [index: string]: any }> = {
   };
   
   export enum Types {
-    Create = "CREATE_PRODUCT",
-    Delete = "DELETE_PRODUCT",
-    Add = "ADD_PRODUCT",
-    equation_changed = "equation_changed"
+    CHANGE_LAYOUT_ORIENTATION = "CHANGE_LAYOUT_ORIENTATION",
+    equation_changed = "EQUATION_CHANGED"
   }
   
-  // Product
+  // pageProp
   
-  type ProductType = {
-    id: number;
-    name: string;
-    price: number;
+  export type pagePropType = {
+    orientation: Enums.ORIENTATION;
   };
   
-  type ProductPayload = {
-    [Types.Create]: {
-      id: number;
-      name: string;
-      price: number;
-    };
-    [Types.Delete]: {
-      id: number;
+  type pagePropPayload = {
+    [Types.CHANGE_LAYOUT_ORIENTATION]: {
+      orientation: Enums.ORIENTATION;
     };
   };
   
-  export type ProductActions = ActionMap<ProductPayload>[keyof ActionMap<
-    ProductPayload
+  export type pagePropActions = ActionMap<pagePropPayload>[keyof ActionMap<
+    pagePropPayload
   >];
   
-  export const productReducer = (
-    state: ProductType[],
-    action: ProductActions | EquationPropsActions
+  export const pagePropReducer = (
+    state: pagePropType,
+    action: pagePropActions | EquationPropsActions
   ) => {
     switch (action.type) {
-      case Types.Create:
-        return [
+      case Types.CHANGE_LAYOUT_ORIENTATION:
+        return {
           ...state,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            price: action.payload.price
-          }
-        ];
-      case Types.Delete:
-        return [...state.filter(product => product.id !== action.payload.id)];
+            id: action.payload.orientation,
+          
+        };
       default:
         return state;
     }
@@ -77,11 +65,11 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export const EquationPropsReducer = (
     state: EquationProps,
-    action: ProductActions | EquationPropsActions
+    action: pagePropActions | EquationPropsActions
   ) => {
     switch (action.type) {
       case Types.equation_changed:
-        return state;// modify this
+        return {...state, text:action.payload};// modify this
       default:
         return state;
     }

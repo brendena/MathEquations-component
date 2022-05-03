@@ -1,26 +1,24 @@
 import React, { createContext, useReducer, Dispatch } from "react";
 import {
-  productReducer,
+  pagePropReducer,
   EquationPropsReducer,
-  ProductActions,
+  pagePropActions,
   EquationPropsActions,
-
+  
+  pagePropType,
   EquationProps
 } from "./reducers";
-
-type ProductType = {
-  id: number;
-  name: string;
-  price: number;
-};
+import * as Enums from "./conts/enums"
 
 type InitialStateType = {
-  products: ProductType[];
+  pageProps: pagePropType;
   EquationProps: EquationProps;
 };
 
 const initialState = {
-  products: [],
+  pageProps: {
+    orientation: Enums.ORIENTATION.BOTTOM
+  },
   EquationProps: {
         text: ""
   }
@@ -28,17 +26,17 @@ const initialState = {
 
 const AppContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<ProductActions | EquationPropsActions>;
+  dispatch: Dispatch<pagePropActions | EquationPropsActions>;
 }>({
   state: initialState,
   dispatch: () => null
 });
 
 const mainReducer = (
-  { products, EquationProps }: InitialStateType,
-  action: ProductActions | EquationPropsActions
+  { pageProps, EquationProps }: InitialStateType,
+  action: pagePropActions | EquationPropsActions
 ) => ({
-  products: productReducer(products, action),
+  pageProps: pagePropReducer(pageProps, action),
   EquationProps: EquationPropsReducer(EquationProps, action)
 });
 

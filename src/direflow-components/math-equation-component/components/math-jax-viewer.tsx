@@ -1,16 +1,17 @@
 import React, { FC, useContext, useEffect, useRef } from 'react';
-//import * as MathJax from "mathjax/es5/core.js"
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
+import { AppContext } from "../context";
+
 
 
 
 const MathJaxViewer: React.FC = () => {
-
+  const { state  } = React.useContext(AppContext);
 
   return (
-    <div>
+    <div id="mathJaxViewer">
         <MathJaxContext>
-            <MathJax>{"\\(\\frac{10}{4x} \\approx 2^{12}\\)"}</MathJax>
+            <MathJax>{"\\(" + state.EquationProps.text + "\\)"}</MathJax>
        </MathJaxContext>
         <p>test~~~~~~~~~~~~~~~~</p>
     </div>

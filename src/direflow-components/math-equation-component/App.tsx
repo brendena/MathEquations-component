@@ -1,66 +1,29 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import { EventContext, Styled } from 'direflow-component';
-import styles from './App.css';
-import MathJaxViewer from './components/math-jax-viewer'
-import MathTextInput from './components/math-text-input'
 import { AppProvider } from "./context";
+import MathEquationComponent from './components/math-equation-continer';
 
+import styles from './App.css';
+/* i can add multiple styles here */
 interface IProps {
   componentTitle: string;
   sampleList: string[];
 }
 
 const App: FC<IProps> = (props) => {
-  let ref = useRef(null);
-
-  const mouseMove = (pos : MouseEvent)=>{
-    let current : any = ref.current
-    if(current  != null)
-    {
-      console.log(pos.pageY + " "  + pos.pageX)
-      console.log(current)
-      console.log(document)
-      current.style.setProperty('--length-ui', document.documentElement.clientWidth - pos.pageX+ "px");
-      //console.log(ref.current);
-    }
-  }
-
-  const mouseResizeStart = ()=>{
-    
-    console.log("resize started");
-    document.body.addEventListener("mousemove", mouseMove)
-    document.body.addEventListener("mouseup", ()=>{
-      document.body.removeEventListener("mousemove",mouseMove,false);
-    }, {"once": true});
-  }
 
 
+  /*
+  The enclosde div is needed because of the way the <Styled> tag works.  
+  It basically give a scope to the first elment under it and a component doesn't seem to work.  
+  So it need to be a div.
+  */
   return (
-
     <AppProvider>
-      <Styled styles={styles}>
-          <div>
-            <div id="appSpacer"></div>
-            <div id="mathExtensionGrid" className={"vertical"} ref={ref}>
-              <div id="textInputContainer">
-                <MathTextInput></MathTextInput>
-              </div>
-              <div id="textOutput">
-                <MathJaxViewer></MathJaxViewer>
-              </div>
-              <div id="selectLanguage">bottom left</div>
-              <div id="otherSettings">bottom right</div>
-
-              
-              <img id="handle" 
-                  src="resizeIcon.svg"
-                  alt="triangle with all three sides equal"
-                  draggable={false}
-                  onMouseDown={()=>{mouseResizeStart()}}
-                  />
-            </div>
-          </div>
-        
+      <Styled styles={[styles]} scoped={false}>
+        <div> 
+          <MathEquationComponent></MathEquationComponent>
+        </div>
       </Styled>
     </AppProvider>
   );
