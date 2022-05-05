@@ -1,5 +1,6 @@
 :host {
   --main-color: #ffdc78;
+  --alt-color: #8064d6;
   --text-background: white;
   --font-color: black;
   --clear: rgba(0,0,0,0);
@@ -27,7 +28,7 @@
   height: var(--length-ui);
   max-height: 95vh;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 100px;
+  grid-template-rows: 1fr 75px;
 }
 
 .vertical {
@@ -67,6 +68,9 @@
   background: var(--main-color);
   grid-column: 1 / span 2;
   grid-row: 2 / span 1;
+  display:flex;
+  align-items: center
+
 }
 
 
@@ -125,4 +129,34 @@
 
 #mathJaxViewer{
   padding: 20px;
+}
+
+#logo{
+  height:100%;
+  background-color: var(--alt-color);
+}
+
+.navButton{
+  height:100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 30px;
+  border-width: 0px;
+  box-shadow: none;
+  outline: 0;
+  background: inherit;
+  font-family: 'Times New Roman', Times, serif;
+}
+.navButtonIcons{
+  max-width: 50px;
+}
+
+.navButton:hover
+{
+  filter: brightness(90%);
+}
+
+.flexSpacer{
+  flex-grow:2;
+  
 }

@@ -29,6 +29,10 @@
     "test": "direflow-scripts test"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.3",
     "@types/react-dom": "16.9.1",
@@ -44,6 +48,7 @@
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
     "@types/jest": "24.0.18",
     "@types/react-test-renderer": "16.9.1",
     "jest-environment-jsdom-fourteen": "0.1.0",

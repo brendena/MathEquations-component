@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useRef } from 'react';
 import MathJaxViewer from './math-jax-viewer'
 import MathTextInput from './math-text-input'
 import { useMouseMove } from '../handles/userMouseResize';
-
+import NavBar from "./nav-bar"
 
 const MathEquationComponent: React.FC = () => {
   let ref = useRef(null);
@@ -24,7 +24,7 @@ const MathEquationComponent: React.FC = () => {
         <div id="textOutput">
           <MathJaxViewer></MathJaxViewer>
         </div>
-        <div id="navBar">bottom left</div>
+        <NavBar></NavBar>
 
         
         <img id="handle" 
