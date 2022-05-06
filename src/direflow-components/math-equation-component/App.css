@@ -138,6 +138,8 @@
 
 .navButton{
   height:100%;
+  display: flex;
+  align-items: center;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 30px;
@@ -153,6 +155,11 @@
 
 .navButton:hover
 {
+  filter: brightness(90%);
+}
+
+
+input[type="radio"]:checked + label {
   filter: brightness(90%);
 }
 

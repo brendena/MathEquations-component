@@ -20,7 +20,8 @@ const initialState = {
     orientation: Enums.ORIENTATION.BOTTOM
   },
   EquationProps: {
-        text: ""
+      text: "",
+      mathType: Enums.MathTypes.LaTEX
   }
 };
 
@@ -42,7 +43,7 @@ const mainReducer = (
 
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
-
+  console.log(state);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

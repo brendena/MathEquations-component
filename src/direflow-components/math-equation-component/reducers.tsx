@@ -13,7 +13,8 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export enum Types {
     CHANGE_LAYOUT_ORIENTATION = "CHANGE_LAYOUT_ORIENTATION",
-    equation_changed = "EQUATION_CHANGED"
+    equation_changed = "EQUATION_CHANGED",
+    MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED"
   }
   
   // pageProp
@@ -52,11 +53,13 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export type EquationProps = {
     text: string;
+    mathType: Enums.MathTypes;
   };
   
 
   type EquationPropsPayload = {
     [Types.equation_changed]: string;
+    [Types.MATH_TYPE_CHANGED]: Enums.MathTypes;
   };
   
   export type EquationPropsActions = ActionMap<
@@ -70,6 +73,8 @@ type ActionMap<M extends { [index: string]: any }> = {
     switch (action.type) {
       case Types.equation_changed:
         return {...state, text:action.payload};// modify this
+      case Types.MATH_TYPE_CHANGED:
+        return {...state, mathType:action.payload}
       default:
         return state;
     }
