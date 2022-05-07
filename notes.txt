@@ -1,1 +1,5 @@
 context using - https://dev.to/elisealcala/react-context-with-usereducer-and-typescript-4obm
+
+
+convert your svg's to base 64's 
+https://codebeautify.org/svg-to-base64-converter

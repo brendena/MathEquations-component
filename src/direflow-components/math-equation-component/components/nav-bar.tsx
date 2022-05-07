@@ -6,7 +6,7 @@ import RadioButtonInput from './radioButtonInput';
 import { AppContext } from "../context";
 import { Types } from '../reducers';
 import * as Enums from '../conts/enums'
-
+import { mathEquationIcon } from '../conts/base64Images';
 
 const NavBar: React.FC = () => {
 
@@ -36,28 +36,29 @@ const NavBar: React.FC = () => {
   return (
 
         <div id="navBar">
-          <img id="logo" 
-            src="logoClearBackground.svg"
+
+          <img 
+            id="logo" 
             alt="logo"
             draggable={false}
-            />
+            src={mathEquationIcon}/>
 
           {mapData}
 
 
 
           <div className='flexSpacer'></div>
-          <button className='navButton navButtonIcons'>
-            <FontAwesomeIcon icon={faChevronDown} />
+          <button className='navButton'>
+            <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
           </button>
-          <button className='navButton navButtonIcons'>
-            <FontAwesomeIcon icon={faGear} />
+          <button className='navButton'>
+            <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
           </button>
-          <button className='navButton navButtonIcons'>
-            <FontAwesomeIcon icon={faGithub} />
+          <button className='navButton'>
+            <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
           </button>
-          <button className='navButton navButtonIcons'>
-            <FontAwesomeIcon icon={faSquareXmark} />
+          <button className='navButton'>
+            <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
           </button>
         </div>
   );
