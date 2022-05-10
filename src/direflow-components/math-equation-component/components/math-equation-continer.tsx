@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import MathJaxViewer from './math-jax-viewer'
 import MathTextInput from './math-text-input'
 import * as Enums from '../conts/enums'

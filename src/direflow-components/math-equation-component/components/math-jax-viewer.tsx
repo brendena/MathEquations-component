@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React from 'react';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
 import { AppContext } from "../context";
 
