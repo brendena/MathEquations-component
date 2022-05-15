@@ -6,8 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css">
     <title>Math Equation Component</title>
+    <script>
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        console.log(ev);
+        console.log(data);
+      }
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+    </script>
   </head>
   <body>
+    <div id="dragBox" style="width:100vw; height:100vh; position:fixed" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     <math-equation-component></math-equation-component>
+
   </body>
 </html>
