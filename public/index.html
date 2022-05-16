@@ -9,9 +9,12 @@
     <script>
       function drop(ev) {
         ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
+        console.log("Got here ~~~~~~~~~~~~~~~~")
+        var data = ev.dataTransfer.getData("text/html");
         console.log(ev);
         console.log(data);
+
+        document.getElementById("dragBox").innerHTML = data;
       }
       function allowDrop(ev) {
         ev.preventDefault();
@@ -20,7 +23,7 @@
     </script>
   </head>
   <body>
-    <div id="dragBox" style="width:100vw; height:100vh; position:fixed" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="dragBox" style="width:100vw; height:100vh; position:fixed; left:0; top:0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     <math-equation-component></math-equation-component>
 
   </body>
