@@ -162,6 +162,12 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
+/*don't know why i need this else the */
+.navButton > svg{
+  width:30px;
+}
+
+
 .vertical .navButton {
   padding-left:0px;
   padding-right:0px;

@@ -65,11 +65,12 @@ async function generatePNG(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
     //get the metadata then 
     let metaData = pngMeta.readMetadata(blob8)
     metaData["tEXt"] = {"test":"shit"}
-    let newBlob = pngMeta.writeMetadata(blob8,metaData);
+    let newBlob = pngMeta.writeMetadata(blob8,metaData); //in uint8
 
-    const backToBlob = new Blob([newBlob],{type: "image/png"});
+    const backToBlob = new Blob([newBlob],{type: "image/png"}); //converts it to base64
     return backToBlob;
 }
+
 
 
 
@@ -82,9 +83,7 @@ export function useMathJaxImage()
     
     async function addCanvasToClipboard()
     {
-        
         if(mathJaxConRef?.current && canvasRef?.current){
-            console.log("111111111111111111111")
             const blob = await generatePNG(mathJaxConRef.current, canvasRef.current);
             
             let clipboard :any = navigator.clipboard;
@@ -96,10 +95,8 @@ export function useMathJaxImage()
         }
     }
 
+    //
     async function onMouseDown(event : React.MouseEvent){
-      const d = new Date();
-      let ms = d.getMilliseconds();
-      console.log(ms)
       if(mathJaxConRef?.current && canvasRef?.current){
         const blob = await generatePNG(mathJaxConRef.current, canvasRef.current);
         let test  = await base64_arraybuffer(blob) as string;
@@ -107,19 +104,15 @@ export function useMathJaxImage()
       }
     }
 
+    //onDrag can't be async
     function onDrag(event : React.DragEvent<HTMLDivElement>) {
       const d = new Date(); //this seems to slow it down so i can use it 
-      //let ms = d.getMilliseconds();
-      //console.log(ms)
-      //console.log(image)
-      console.log("drag started");
-      console.log("111111111111111111111")
-      var testImage = document.createElement("img");
-      testImage.src = image;
+      var imageDiv = document.createElement("img");
+      imageDiv.src = image;
       var wrapper = document.createElement("div");
-      wrapper.appendChild(testImage);
+      wrapper.appendChild(imageDiv);
       event.dataTransfer.setData("text/html",wrapper.innerHTML.toString());
-      event.dataTransfer.setDragImage(testImage, 0,0)
+      event.dataTransfer.setDragImage(imageDiv, 0,0)
     
     }
 
