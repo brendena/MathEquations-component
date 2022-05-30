@@ -3,7 +3,8 @@ import { EventContext, Styled } from 'direflow-component';
 import { AppProvider } from "./context";
 import MathEquationComponent from './components/math-equation-continer';
 
-import styles from './App.css';
+import appStyles from './App.css';
+import navStyles from "./nav.css"
 /* i can add multiple styles here */
 interface IProps {
   componentTitle: string;
@@ -20,7 +21,7 @@ const App: FC<IProps> = (props) => {
   */
   return (
     <AppProvider>
-      <Styled styles={[styles]} scoped={false}>
+      <Styled styles={[navStyles,appStyles]} scoped={false}>
         <div> 
           <MathEquationComponent></MathEquationComponent>
         </div>

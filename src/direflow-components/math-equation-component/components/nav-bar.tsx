@@ -36,30 +36,34 @@ const NavBar: React.FC = () => {
   return (
 
         <div id="navBar">
-
-          <img 
-            id="logo" 
-            alt="logo"
-            draggable={false}
-            src={mathEquationIcon}/>
-
-          {mapData}
-
+          <div>
+            <img 
+              id="logo" 
+              alt="logo"
+              draggable={false}
+              src={mathEquationIcon}/>
+          </div>
+          <div>
+            {mapData}
+          </div>
 
 
           <div className='flexSpacer'></div>
-          <button className='navButton'>
-            <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
-          </button>
-          <button className='navButton'>
-            <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
-          </button>
-          <button className='navButton'>
-            <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
-          </button>
-          <button className='navButton'>
-            <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
-          </button>
+
+          <div>
+            <button className='navButton'>
+              <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
+            </button>
+            <button className='navButton'>
+              <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
+            </button>
+            <button className='navButton'>
+              <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
+            </button>
+            <button className='navButton'>
+              <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
+            </button>
+          </div>
         </div>
   );
 };

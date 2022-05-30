@@ -5,7 +5,21 @@
   --font-color: black;
   --clear: rgba(0,0,0,0);
   user-select: none; /*used to disable all the weird effect that the movible nav creates*/
+  --nav-bar-height: 100px;
+
+
+
+
+/*variables for nav bar*/
+  --navButton-pad-top-bottom: 00px;
+  --navbutton-pad-left-right: 10px;
 }
+
+#V:checked ~ #mathExtensionGrid{
+  --navButton-pad-top-bottom: 20px;
+  --navbutton-pad-left-right: 0px;
+}
+
 
 #appSpacer{
   width:100vw;
@@ -42,6 +56,7 @@
   grid-template-columns: 1fr 100px;
   grid-template-rows: 1fr 1fr;
 }
+/*textInputContainer*/
 
 .vertical > #textInputContainer
 {
@@ -55,8 +70,9 @@
   background:white;
   border-top-style: solid;
   border-top-width: 1px;
-
+  overflow:hidden;
 }
+/*textOutput*/
 
 #textOutput{
   background:white;
@@ -64,6 +80,7 @@
   border-top-width: 1px;
   border-left-style: solid;
   border-left-width: 1px;
+  overflow:hidden;
 }
 
 
@@ -73,8 +90,10 @@
   
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
-
 }
+
+
+/*handle*/
 
 
 
@@ -96,22 +115,8 @@
   -webkit-user-drag: none;
   user-select: all;
 }
+/*navBar*/
 
-
-@media  screen and (max-width: 700px) { 
-  #mathExtensionGrid.horizontal{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-  }
-  
-  #mathExtensionGrid.vertical{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-  }
-  
-}
-
-/*///////////////////////////////////////////////////////////*/
 #navBar{
   background: var(--main-color);
   grid-column: 1 / span 2;
@@ -130,76 +135,35 @@
 }
 
 
-#inputTextMathEquation{
-  resize: none;
-  box-sizing: border-box;
-  padding: 20px;
-  border-width: 0;
-  width:100%;
-  height:100%;
-}
 
-#mathJaxViewer{
-  padding: 20px;
-}
-
-#logo{
-  height:100%;
-  background-color: var(--alt-color);
-}
-
-.navButton{
-  height:100%;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 30px;
-  border-width: 0px;
-  box-shadow: none;
-  outline: 0;
-  background: inherit;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-/*don't know why i need this else the */
-.navButton > svg{
-  width:30px;
-}
-
-
-.vertical .navButton {
-  padding-left:0px;
-  padding-right:0px;
-  font-size: 20px;
-  width:100%;
-  justify-content: center;
-}
-
-.navButtonIcons{
-  max-width: 30px;
-}
-
-.navButton:hover
-{
-  filter: brightness(90%);
-}
-
-
-input[type="radio"]:checked + label {
-  filter: brightness(90%);
-}
-
-.flexSpacer{
-  flex-grow:2;
+@media  screen and (max-width: 700px) { 
+  #mathExtensionGrid.horizontal{
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
+  }
   
-}
+  #mathExtensionGrid.vertical{
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
+  }
+  
+  .vertical > #textInputContainer
+  {
+    grid-row: 3 / span 1;
+  }
 
+  .vertical > #textOutput{
+    grid-row: 4 / span 1;
+  }
 
-mjx-assistive-mml {
-  display:none;
-}
+  .vertical > #textInputContainer
+  {
+    grid-row: 3 / span 1;
+  }
 
-#mathJaxViewer {
-  user-select: all;
+  .vertical > #navBar{
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+  }
+  
 }

@@ -25,13 +25,23 @@ const MathEquationComponent: React.FC = () => {
     navBarPosition = "vertical"
   }
 
+
+  let onResize = ()=>{
+
+  }
   //
 
   console.log("test")
   return (
     <> 
+
       <div id="appSpacer"></div>
-      <div id="mathExtensionGrid" className={navBarPosition} ref={ref}>
+      <input id="V" type="checkbox" checked></input> 
+      <input id="L" type="checkbox" checked></input>
+        
+      <div id="mathExtensionGrid" className={navBarPosition} ref={ref} >
+
+
         <div id="textInputContainer">
           <MathTextInput></MathTextInput>
         </div>
