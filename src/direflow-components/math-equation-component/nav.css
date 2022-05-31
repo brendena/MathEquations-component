@@ -81,12 +81,12 @@
 
 .navButton:hover
 {
-  filter: brightness(90%);
+  background: var(--main-color-selected);
 }
 
 
 input[type="radio"]:checked + label {
-  filter: brightness(90%);
+  background: var(--main-color-selected);
 }
 
 .flexSpacer{

@@ -1,5 +1,6 @@
 :host {
   --main-color: #ffdc78;
+  --main-color-selected: #e4c56d;
   --alt-color: #8064d6;
   --text-background: white;
   --font-color: black;
