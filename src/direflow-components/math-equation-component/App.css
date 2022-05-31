@@ -5,7 +5,7 @@
   --font-color: black;
   --clear: rgba(0,0,0,0);
   user-select: none; /*used to disable all the weird effect that the movible nav creates*/
-  --nav-bar-height: 100px;
+  --nav-bar-height: 75px;
 
 
 
@@ -16,6 +16,8 @@
   --navBar-group-display: auto;
   --navBar-group-width: auto;
   --navBar-image-size: var(--nav-bar-height);
+  --navBar-image-container: none;
+  --navBar-image-container-width: auto;
 }
 
 #V:checked ~ #mathExtensionGrid{
@@ -24,6 +26,8 @@
   --navBar-group-display: flex;
   --navBar-group-width: 100%;
   --navBar-image-size: 50px;
+  --navBar-image-container: auto;
+  --navBar-image-container-width: 100%;
 }
 
 
@@ -50,7 +54,7 @@
   height: var(--length-ui);
   max-height: 95vh;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 75px;
+  grid-template-rows: 1fr var(--nav-bar-height);
 }
 
 .vertical {

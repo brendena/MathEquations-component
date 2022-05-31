@@ -26,9 +26,6 @@ const MathEquationComponent: React.FC = () => {
   }
 
 
-  let onResize = ()=>{
-
-  }
   //
 
   console.log("test")

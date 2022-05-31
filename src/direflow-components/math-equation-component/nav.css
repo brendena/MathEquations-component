@@ -15,7 +15,7 @@
 }
 
 #logoContainer {
-  width: 100%;
+  width: var(--navBar-image-container-width);
   color:white;
   background-color: var(--alt-color);
   display: flex;
@@ -27,6 +27,8 @@
   text-align: center;
   font-size: 25px;
   margin-right: calc(var(--navBar-image-size) * -.5);
+  display: var(--navBar-image-container);
+
 }
 
 #logo{
@@ -55,7 +57,7 @@
 }
 
 .navBarGroupButtons{
-  display: var(--navBar-group-display);
+  display: flex;
   width:   var(--navBar-group-width);
 }
 
