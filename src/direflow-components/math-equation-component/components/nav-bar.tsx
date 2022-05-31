@@ -36,21 +36,22 @@ const NavBar: React.FC = () => {
   return (
 
         <div id="navBar">
-          <div>
+          <div id="logoContainer"> 
+            <span>{"<"}Math Equations {"/>"}</span>
             <img 
               id="logo" 
               alt="logo"
               draggable={false}
               src={mathEquationIcon}/>
           </div>
-          <div>
+          <div className="navBarGroupButtons">
             {mapData}
           </div>
 
 
           <div className='flexSpacer'></div>
 
-          <div>
+          <div className="navBarGroupButtons">
             <button className='navButton'>
               <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
             </button>

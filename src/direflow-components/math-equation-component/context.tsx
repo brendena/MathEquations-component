@@ -17,7 +17,8 @@ type InitialStateType = {
 
 const initialState = {
   pageProps: {
-    orientation: Enums.ORIENTATION.RIGHT
+    orientation: Enums.ORIENTATION.RIGHT,
+    sizeComponent: 400
   },
   EquationProps: {
       text: "",

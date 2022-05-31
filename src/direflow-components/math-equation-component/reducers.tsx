@@ -14,7 +14,8 @@ type ActionMap<M extends { [index: string]: any }> = {
   export enum Types {
     CHANGE_LAYOUT_ORIENTATION = "CHANGE_LAYOUT_ORIENTATION",
     equation_changed = "EQUATION_CHANGED",
-    MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED"
+    MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED",
+    CHANGED_SIZE_COMPONENT = "CHANGED_SIZE_COMPONENT" 
   }
   
   // pageProp
@@ -24,9 +25,7 @@ type ActionMap<M extends { [index: string]: any }> = {
   };
   
   type pagePropPayload = {
-    [Types.CHANGE_LAYOUT_ORIENTATION]: {
-      orientation: Enums.ORIENTATION;
-    };
+    [Types.CHANGE_LAYOUT_ORIENTATION]: Enums.ORIENTATION;
   };
   
   export type pagePropActions = ActionMap<pagePropPayload>[keyof ActionMap<
@@ -41,7 +40,7 @@ type ActionMap<M extends { [index: string]: any }> = {
       case Types.CHANGE_LAYOUT_ORIENTATION:
         return {
           ...state,
-            id: action.payload.orientation,
+          orientation: action.payload,
           
         };
       default:

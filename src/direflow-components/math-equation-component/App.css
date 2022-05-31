@@ -13,11 +13,17 @@
 /*variables for nav bar*/
   --navButton-pad-top-bottom: 00px;
   --navbutton-pad-left-right: 10px;
+  --navBar-group-display: auto;
+  --navBar-group-width: auto;
+  --navBar-image-size: var(--nav-bar-height);
 }
 
 #V:checked ~ #mathExtensionGrid{
   --navButton-pad-top-bottom: 20px;
   --navbutton-pad-left-right: 0px;
+  --navBar-group-display: flex;
+  --navBar-group-width: 100%;
+  --navBar-image-size: 50px;
 }
 
 
@@ -53,8 +59,8 @@
   height:100%;
   width: var(--length-ui);
   max-width: 95vw;
-  grid-template-columns: 1fr 100px;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 2fr 1fr;
 }
 /*textInputContainer*/
 
@@ -127,11 +133,24 @@
 
 .vertical > #navBar{
   background: var(--main-color);
-  grid-column: 2 / span 1;
-  grid-row: 1 / span 2;
   display:flex;
   flex-direction: column;
   align-items: center
+}
+
+.vertical > #textInputContainer
+{
+  grid-row: 2 / span 1;
+}
+
+.vertical > #textOutput{
+  grid-row: 3 / span 1;
+}
+
+
+.vertical > #navBar{
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
 }
 
 
@@ -142,28 +161,7 @@
     grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
   }
   
-  #mathExtensionGrid.vertical{
-    grid-template-columns: 1fr;
-    grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
-  }
-  
-  .vertical > #textInputContainer
-  {
-    grid-row: 3 / span 1;
-  }
 
-  .vertical > #textOutput{
-    grid-row: 4 / span 1;
-  }
 
-  .vertical > #textInputContainer
-  {
-    grid-row: 3 / span 1;
-  }
-
-  .vertical > #navBar{
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 2;
-  }
   
 }
