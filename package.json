@@ -48,11 +48,12 @@
     "npm": "8.8.0",
     "react-scripts": "3.4.1"
   },
-  "peerDependencies":{
+  "peerDependencies": {
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
+    "@types/base-64": "^1.0.0",
     "@types/jest": "24.0.18",
     "@types/react-test-renderer": "16.9.1",
     "jest-environment-jsdom-fourteen": "0.1.0",
