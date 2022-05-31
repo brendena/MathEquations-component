@@ -1,0 +1,18 @@
+{
+  "name": "mathjax",
+  "version": "1.0.0",
+  "description": "* [custom components](https://docs.mathjax.org/en/latest/web/webpack.html) * [original file that i've modified](https://github.com/mathjax/MathJax-demos-web/tree/master/custom-component)",
+  "main": "custom-component.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mathjax-full": "^3.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
