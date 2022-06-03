@@ -1,3 +1,4 @@
+
 //
 //  Initialize the MathJax startup code
 //
@@ -11,12 +12,16 @@ const {Loader} = require('mathjax-full/js/components/loader.js');
 Loader.preLoad(
   'loader', 'startup',
   'core',
-  'input/tex-base',
+  'input/tex-full',
   '[tex]/ams',
   '[tex]/newcommand',
   '[tex]/configmacros',
   '[tex]/action',
-  'output/chtml', 'output/chtml/fonts/tex.js',
+
+  'input/mml',
+  'input/asciimath',
+  
+  'output/svg', 'output/svg/fonts/tex.js',
   'ui/menu'
 );
 
@@ -27,14 +32,18 @@ Loader.preLoad(
 //
 const {insert} = require('mathjax-full/js/util/Options.js');
 insert(MathJax.config, {
+  
   loader: {
     paths: {
       mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5'
     }
   },
+
   tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
     packages: {'[+]': ['ams', 'newcommand', 'configmacros', 'action']}
-  }
+  },
+  
 }, false);
 
 //
@@ -43,16 +52,21 @@ insert(MathJax.config, {
 //
 require('mathjax-full/components/src/core/core.js');
 
-require('mathjax-full/components/src/input/tex-base/tex-base.js');
+require('mathjax-full/components/src/input/tex-full/tex-full.js');
 require('mathjax-full/components/src/input/tex/extensions/ams/ams.js');
 require('mathjax-full/components/src/input/tex/extensions/newcommand/newcommand.js');
 require('mathjax-full/components/src/input/tex/extensions/configmacros/configmacros.js');
 require('mathjax-full/components/src/input/tex/extensions/action/action.js');
 
-require('mathjax-full/components/src/output/chtml/chtml.js');
-require('mathjax-full/components/src/output/chtml/fonts/tex/tex.js');
+require('mathjax-full/components/src/output/svg/svg.js');
+require('mathjax-full/components/src/output/svg/fonts/tex/tex.js');
 
 require('mathjax-full/components/src/ui/menu/menu.js');
+
+require('mathjax-full/components/src/input/tex-full/tex-full.js');
+require('mathjax-full/components/src/input/mml/mml.js');
+require('mathjax-full/components/src/input/asciimath/asciimath.js');
+
 
 //
 // Loading this component will cause all the normal startup

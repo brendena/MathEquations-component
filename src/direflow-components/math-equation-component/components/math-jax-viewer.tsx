@@ -1,8 +1,17 @@
 import React from 'react';
-import { MathJaxContext, MathJax } from 'better-react-mathjax';
+//*
+import { MathJax, MathJaxContext } from 'better-react-mathjax';
+import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJaxContext';
+
+
 import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
+import { MathTypes } from '../conts/enums';
 
+/*
+https://github.com/fast-reflexes/better-react-mathjax/issues/17
+try and fix the included src problem
+*/
 
 
 const MathJaxViewer: React.FC = () => {
@@ -14,12 +23,27 @@ const MathJaxViewer: React.FC = () => {
 
   let text = state.EquationProps.text; 
   if(text === "") text=" ";
+
+  let functionType : TypesettingFunction;
+  switch(state.EquationProps.mathType)
+  {
+    case MathTypes.AsciiMath:
+      functionType = "asciimath2svg";
+      break;
+    case MathTypes.LaTEX:
+      functionType = "tex2svg";  
+      break;
+    case MathTypes.MathML:
+      functionType = "mathml2svg";
+      break;
+  }
+
   return (
-    <div id="mathJaxViewer" ref={mathJaxConRef} draggable={true} onDragStart={onDrag}  onMouseDown={onMouseDown}>
+    <div id="mathJaxViewer" draggable={true} onDragStart={onDrag}  onMouseDown={onMouseDown}>
       <div>
-          <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js" >
-              <MathJax typesettingOptions={{fn:"tex2svg"}} text={text} dynamic={true} inline > </MathJax>
-        </MathJaxContext>
+          <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" >
+              <MathJax typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
+          </MathJaxContext>
       </div>
 
         <canvas ref={canvasRef}>
