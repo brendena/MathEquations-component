@@ -10,9 +10,13 @@
       function drop(ev) {
         ev.preventDefault();
         console.log("Got here ~~~~~~~~~~~~~~~~")
+        console.log(ev.dataTransfer)
+        console.log(ev.dataTransfer.types)
         var data = ev.dataTransfer.getData("text/html");
-        console.log(ev);
-        console.log(data);
+        ev.dataTransfer.types.forEach(element => {
+          console.log(element)
+          console.log(ev.dataTransfer.getData(element))
+        });
 
         document.getElementById("dragBox").innerHTML = data;
       }

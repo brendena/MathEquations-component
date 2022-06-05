@@ -83,6 +83,12 @@
   border-top-width: 1px;
   overflow:hidden;
 }
+
+.textInputOnDragEnter
+{
+  background:red;
+}
+
 /*textOutput*/
 
 #textOutput{

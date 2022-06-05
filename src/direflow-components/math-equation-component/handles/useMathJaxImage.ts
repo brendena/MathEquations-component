@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
-import * as base64 from "base-64";
+import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../lib/convert"
 
 //need these becuase the version of typescript used here is fairly old
 interface ClipboardItem {
@@ -20,16 +20,7 @@ interface ClipboardItem {
   };
 
 
-  //https://stackoverflow.com/questions/12710001/how-to-convert-uint8-array-to-base64-encoded-string
-const base64_arraybuffer = async (blob:Blob) =>  {
-    const base64url = await new Promise((r) => {
-      const reader = new FileReader()
-      reader.onload = () => r(reader.result)
-      reader.readAsDataURL(blob);
-  })
 
-    return base64url;
-}
 
 
 function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
@@ -47,31 +38,19 @@ function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement
     }
 }
 
-async function  convertCanvasToPng(canvas : HTMLCanvasElement ){
-    return new Promise(resolve  =>{ 
-      canvas.toBlob((blob :any)=>{resolve(blob);}); //converts it to png
-    });
-  }
 
-async function generatePNG(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
+async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
 {
-    drawMathJaxToCanvas(mathJax,canvas);
-
-    //get canvas into png and into Uint8Array
-    let blobb :any = await convertCanvasToPng(canvas);
-    const blobArray = await blobb.arrayBuffer();
-    const blob8 = new Uint8Array(blobArray);
-
-    //get the metadata then 
-    let metaData = pngMeta.readMetadata(blob8)
-    metaData["tEXt"] = {"test":"shit"}
-    let newBlob = pngMeta.writeMetadata(blob8,metaData); //in uint8
-
-    const backToBlob = new Blob([newBlob],{type: "image/png"}); //converts it to base64
-    return backToBlob;
-}
-
-
+  drawMathJaxToCanvas(mathJax,canvas);
+  let pngImage = await convertCanvasToPNG_Uint8(canvas);
+  
+  //get the metadata then 
+  let metaData = pngMeta.readMetadata(pngImage)
+  metaData["tEXt"] = {"test":"shit"}
+  let pngU8 = pngMeta.writeMetadata(pngImage,metaData);
+  
+  return convertUint8ToPNGBlob(pngU8);
+} 
 
 
 export function useMathJaxImage()
@@ -84,8 +63,7 @@ export function useMathJaxImage()
     async function addCanvasToClipboard()
     {
         if(mathJaxConRef?.current && canvasRef?.current){
-            const blob = await generatePNG(mathJaxConRef.current, canvasRef.current);
-            
+            const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current);
             let clipboard :any = navigator.clipboard;
             clipboard.write([
               new ClipboardItem({
@@ -98,8 +76,9 @@ export function useMathJaxImage()
     //
     async function onMouseDown(event : React.MouseEvent){
       if(mathJaxConRef?.current && canvasRef?.current){
-        const blob = await generatePNG(mathJaxConRef.current, canvasRef.current);
-        let test  = await base64_arraybuffer(blob) as string;
+        const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current);
+        let test  = await convert_blobToBase64String(blob) as string;
+        console.log(test)
         setImage(test);
       }
     }
