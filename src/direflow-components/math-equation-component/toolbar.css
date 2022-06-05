@@ -28,5 +28,9 @@
 .toolbarIcons {
   height: 100%;
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-block; 
+}
+
+.sizeSelected {
+  background-color: #b9b9b9;
 }

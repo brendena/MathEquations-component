@@ -28,13 +28,16 @@ function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement
     let svgCon = mathJax.getElementsByTagName('mjx-container')[0];
     let removeElement = svgCon.getElementsByTagName("mjx-assistive-mml");
     if(removeElement.length === 1) svgCon.removeChild(removeElement[0]);
-    let svgData = svgCon.innerHTML;
 
     let ctx = canvas.getContext('2d');
-    if(ctx)
+    let svgData = svgCon.firstChild?.cloneNode(true);
+    if(svgData != null && ctx != null)
     {
-        let v = Canvg.fromString(ctx,svgData)
-        v.start();
+      let svg :any = svgData;
+      svg.style.color="red"
+      console.log(svg.outerHTML);
+      let v = Canvg.fromString(ctx,svg.outerHTML)
+      v.start();
     }
 }
 

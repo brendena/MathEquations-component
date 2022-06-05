@@ -42,9 +42,9 @@ const MathJaxViewer: React.FC = () => {
 
 
   return (
-    <div id="mathJaxViewer"  ref={mathJaxConRef} draggable={true} onDragStart={onDrag}  onMouseDown={onMouseDown}>
+    <div id="mathJaxViewer"  ref={mathJaxConRef} draggable={true} onDragStart={onDrag}  >
       <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
-      <div>
+      <div onMouseDown={onMouseDown}>
           <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" >
               <MathJax typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
           </MathJaxContext>

@@ -9,5 +9,6 @@ export enum MathTypes {
     AsciiMath = "AsciiMath"
 }
 
+
 //don't really like this
 export const ListMathTypes : Array<MathTypes> = [MathTypes.LaTEX, MathTypes.MathML, MathTypes.AsciiMath]

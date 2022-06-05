@@ -22,7 +22,9 @@ const initialState = {
   },
   EquationProps: {
       text: "",
-      mathType: Enums.MathTypes.LaTEX
+      mathType: Enums.MathTypes.LaTEX,
+      color: "#000000",
+      height: 100
   }
 };
 
