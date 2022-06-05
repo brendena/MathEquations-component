@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
 import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../lib/convert"
+import { AppContext } from "../context";
 
 //need these becuase the version of typescript used here is fairly old
 interface ClipboardItem {
@@ -23,28 +24,39 @@ interface ClipboardItem {
 
 
 
-function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
+function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height:number, color : string )
 {
+
+
     let svgCon = mathJax.getElementsByTagName('mjx-container')[0];
     let removeElement = svgCon.getElementsByTagName("mjx-assistive-mml");
     if(removeElement.length === 1) svgCon.removeChild(removeElement[0]);
+
 
     let ctx = canvas.getContext('2d');
     let svgData = svgCon.firstChild?.cloneNode(true);
     if(svgData != null && ctx != null)
     {
       let svg :any = svgData;
-      svg.style.color="red"
-      console.log(svg.outerHTML);
+      svg.style.color= color;
+      let widthSVG : number = svg.width.animVal.valueInSpecifiedUnits
+      let heightSVG : number = svg.height.animVal.valueInSpecifiedUnits 
+      let ratioSvg = widthSVG/heightSVG;
+      
+      svg.setAttribute("width",(height * ratioSvg) + "px");
+      svg.setAttribute("height",height + "px");
+
+
+      //this function below will resize the canvase to the svg's width and height
       let v = Canvg.fromString(ctx,svg.outerHTML)
       v.start();
     }
 }
 
 
-async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCanvasElement )
+async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height : number, color : string )
 {
-  drawMathJaxToCanvas(mathJax,canvas);
+  drawMathJaxToCanvas(mathJax,canvas,height, color);
   let pngImage = await convertCanvasToPNG_Uint8(canvas);
   
   //get the metadata then 
@@ -58,15 +70,18 @@ async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCa
 
 export function useMathJaxImage()
 {
+    const { state  } = React.useContext(AppContext);
     let mathJaxConRef = useRef<HTMLDivElement>(null);
     let canvasRef = useRef<HTMLCanvasElement>(null);
     const [image,setImage] = useState("");
 
+    const height = state.EquationProps.height;
+    const color = state.EquationProps.color;
     
     async function addCanvasToClipboard()
     {
         if(mathJaxConRef?.current && canvasRef?.current){
-            const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current);
+            const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current, height, color);
             let clipboard :any = navigator.clipboard;
             clipboard.write([
               new ClipboardItem({
@@ -79,7 +94,7 @@ export function useMathJaxImage()
     //
     async function onMouseDown(event : React.MouseEvent){
       if(mathJaxConRef?.current && canvasRef?.current){
-        const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current);
+        const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current, height, color);
         let test  = await convert_blobToBase64String(blob) as string;
         console.log(test)
         setImage(test);

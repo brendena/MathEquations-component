@@ -12,8 +12,6 @@ const NavBar: React.FC = () => {
 
   const { state, dispatch  } = React.useContext(AppContext);
   
-  console.log("testing this out")
-
   const onChangeRadioF = (mathTypeString: string)=>{
     const mathType = mathTypeString as Enums.MathTypes;
     dispatch({
