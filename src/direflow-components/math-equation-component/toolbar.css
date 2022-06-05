@@ -1,0 +1,32 @@
+#toolbox{
+  width:100%;
+  background-color: #ebebeb9e;
+  padding:10px;
+  margin-bottom:10px;
+  display:flex;
+  align-items: center;
+}
+
+.buttonOptionsImage{
+  border: 0;
+  height: 100%;
+  box-sizing: border-box;
+  margin-left:2px;
+  border-width: 1px;
+  border-style: solid;
+}
+.buttonOptionsImage:hover{
+  background-color: #b9b9b9;
+}
+
+.removeStyles
+{
+  background: none; 
+  border: none;
+}
+
+.toolbarIcons {
+  height: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+}

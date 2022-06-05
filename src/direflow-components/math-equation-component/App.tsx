@@ -4,7 +4,8 @@ import { AppProvider } from "./context";
 import MathEquationComponent from './components/math-equation-continer';
 
 import appStyles from './App.css';
-import navStyles from "./nav.css"
+import navStyles from "./nav.css";
+import toolbarStyles from "./toolbar.css"
 /* i can add multiple styles here */
 interface IProps {
   componentTitle: string;
@@ -21,7 +22,7 @@ const App: FC<IProps> = (props) => {
   */
   return (
     <AppProvider>
-      <Styled styles={[navStyles,appStyles]} scoped={false}>
+      <Styled styles={[navStyles,appStyles,toolbarStyles]} scoped={false}>
         <div> 
           <MathEquationComponent></MathEquationComponent>
         </div>

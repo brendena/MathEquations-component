@@ -7,7 +7,7 @@
   --clear: rgba(0,0,0,0);
   user-select: none; /*used to disable all the weird effect that the movible nav creates*/
   --nav-bar-height: 75px;
-
+  --clear: rgba(0,0,0,0);
 
 
 

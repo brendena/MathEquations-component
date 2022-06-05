@@ -7,7 +7,9 @@ import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJax
 import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
 import { MathTypes } from '../conts/enums';
-
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Toolbox from './toolbox';
 /*
 https://github.com/fast-reflexes/better-react-mathjax/issues/17
 try and fix the included src problem
@@ -38,21 +40,21 @@ const MathJaxViewer: React.FC = () => {
       break;
   }
 
+
   return (
     <div id="mathJaxViewer"  ref={mathJaxConRef} draggable={true} onDragStart={onDrag}  onMouseDown={onMouseDown}>
+      <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
       <div>
           <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" >
               <MathJax typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
           </MathJaxContext>
       </div>
 
-        <canvas ref={canvasRef}>
+      <canvas ref={canvasRef}>
 
-        </canvas>
+      </canvas>
 
-        <button onClick={addCanvasToClipboard}>
-test copy
-        </button>
+
     </div>
   );
 };
