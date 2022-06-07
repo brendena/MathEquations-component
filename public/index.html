@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css">
     <title>Math Equation Component</title>
+
+  </head>
+  <body>
+    <div id="dragBox" style="width:100vw; height:100vh; position:fixed; left:0; top:0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <math-equation-component id="mathComponent" ></math-equation-component>
+
+
     <script>
       function drop(ev) {
         ev.preventDefault();
@@ -24,11 +31,12 @@
         ev.preventDefault();
       }
 
-    </script>
-  </head>
-  <body>
-    <div id="dragBox" style="width:100vw; height:100vh; position:fixed; left:0; top:0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-    <math-equation-component></math-equation-component>
+      document.getElementById("mathComponent").addEventListener("math-equation-gen-image",function(e){
+        console.log("got a event")
+        console.log(e)
+        console.log(e.detail)
+      },true)
 
+    </script>
   </body>
 </html>

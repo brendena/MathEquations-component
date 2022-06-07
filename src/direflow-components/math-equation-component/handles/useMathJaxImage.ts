@@ -68,6 +68,8 @@ async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCa
 } 
 
 
+
+
 export function useMathJaxImage()
 {
     const { state  } = React.useContext(AppContext);
@@ -82,12 +84,25 @@ export function useMathJaxImage()
     {
         if(mathJaxConRef?.current && canvasRef?.current){
             const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current, height, color);
+            /*
             let clipboard :any = navigator.clipboard;
             clipboard.write([
               new ClipboardItem({
                 "image/png": blob
               })
-            ]);   
+            ]);
+            */
+            const event = new CustomEvent('math-equation-gen-image', {
+              bubbles: true,
+              cancelable: false,
+              composed: true,
+              detail : {
+                "blob":blob,
+                "equationProps": state.EquationProps
+              }
+            });
+            mathJaxConRef.current.dispatchEvent(event);   
+            console.log("sent event")
         }
     }
 

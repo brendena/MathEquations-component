@@ -7,8 +7,6 @@ import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJax
 import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
 import { MathTypes } from '../conts/enums';
-import { faImage } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Toolbox from './toolbox';
 /*
 https://github.com/fast-reflexes/better-react-mathjax/issues/17
