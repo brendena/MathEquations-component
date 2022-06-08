@@ -11,11 +11,8 @@ const MathEquationComponent: React.FC = () => {
   let ref = useRef(null);
   let {mouseResizeStart} = useMouseMove(ref);
   const { state  } = React.useContext(AppContext);
-  /*
-  const config = {
-    loader: { load: ["input/asciimath"] }
-  };
-  */
+
+
   let navBarPosition = ""
   if(state.pageProps.orientation === Enums.ORIENTATION.BOTTOM)
   {
@@ -26,9 +23,6 @@ const MathEquationComponent: React.FC = () => {
   }
 
 
-  //
-
-  console.log("test")
   return (
     <> 
 

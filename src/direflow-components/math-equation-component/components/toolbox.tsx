@@ -8,8 +8,8 @@ interface toolboxInterface
     copyEvent: () => void
 };
 
-const sizeLargeImage = 100;
-const sizeMediumImage = 50;
+const sizeLargeImage = 200;
+const sizeMediumImage = 100;
 const sizeSmallImage = 25;
 
 const Toolbox: React.FC<toolboxInterface> = (prop) => {
@@ -50,8 +50,12 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       <button className={smallSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeSmallImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'10px'}} />
       </button>
+      <input type="number"
+             style={{"maxWidth":"50px"}} 
+             value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+      </input>
       <span>
-        [{state.EquationProps.height} px height]
+        px height
       </span>
     </div>
 );
