@@ -131,6 +131,7 @@
   z-index: 29;
   -webkit-user-drag: none;
   user-select: all;
+  display: var(--math-equation-handle-display, inherit)
 }
 /*navBar*/
 

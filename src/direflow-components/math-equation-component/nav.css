@@ -101,3 +101,16 @@ mjx-assistive-mml {
 #mathJaxViewer {
   user-select: all;
 }
+
+#navButtonMinimize{
+  display: var(--math-equation-button-minimize-display, inherit)
+}
+#navButtonSettings{
+  display: var(--math-equation-button-setting-display, inherit)
+}
+#navButtonGithubLink{
+  display: var(--math-equation-button-github-display, inherit)
+}
+#navButtonExitButton{
+  display: var(--math-equation-button-exit-display, inherit)
+}

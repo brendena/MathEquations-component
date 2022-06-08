@@ -9,7 +9,7 @@ const MathTextInput: React.FC = () => {
 
   const textUpdated = (e : React.ChangeEvent<HTMLTextAreaElement>)=>{
     console.log(e.currentTarget.value);
-    dispatch({type:Types.equation_changed, payload:e.currentTarget.value})
+    dispatch({type:Types.EQUATION_CHANGED, payload:e.currentTarget.value})
   }
 
   let onDragEnter = (e: DragEvent<HTMLTextAreaElement>)=>{

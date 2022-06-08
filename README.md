@@ -7,4 +7,10 @@ This component was bootstrapped with [Direflow](https://direflow.io).
 <math-equation-component></math-equation-component>
 ```
 
-Use this README to describe your Direflow Component
+
+### CSS external variables
+* --math-equation-handle-display
+* --math-equation-button-minimize-display
+* --math-equation-button-setting-display
+* --math-equation-button-github-display
+* --math-equation-button-exit-display

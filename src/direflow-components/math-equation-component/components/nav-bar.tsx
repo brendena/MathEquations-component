@@ -50,16 +50,16 @@ const NavBar: React.FC = () => {
           <div className='flexSpacer'></div>
 
           <div className="navBarGroupButtons">
-            <button className='navButton'>
+            <button className='navButton' id="navButtonMinimize">
               <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
             </button>
-            <button className='navButton'>
+            <button className='navButton' id="navButtonSettings">
               <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
             </button>
-            <button className='navButton'>
+            <button className='navButton' id="navButtonGithubLink">
               <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
             </button>
-            <button className='navButton'>
+            <button className='navButton' id="navButtonExitButton">
               <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
             </button>
           </div>

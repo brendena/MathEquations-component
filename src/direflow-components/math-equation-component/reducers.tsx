@@ -13,7 +13,7 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export enum Types {
     CHANGE_LAYOUT_ORIENTATION = "CHANGE_LAYOUT_ORIENTATION",
-    equation_changed = "EQUATION_CHANGED",
+    EQUATION_CHANGED = "EQUATION_CHANGED",
     MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED",
     CHANGED_SIZE_COMPONENT = "CHANGED_SIZE_COMPONENT",
     CHANGE_EQUATION_COLOR = "CHANGE_EQUATION_COLOR",
@@ -61,7 +61,7 @@ type ActionMap<M extends { [index: string]: any }> = {
   
 
   type EquationPropsPayload = {
-    [Types.equation_changed]: string;
+    [Types.EQUATION_CHANGED]: string;
     [Types.MATH_TYPE_CHANGED]: Enums.MathTypes;
     [Types.CHANGE_EQUATION_COLOR]: string;
     [Types.CHANGE_EQUATION_HEIGHT]: number;
@@ -76,7 +76,7 @@ type ActionMap<M extends { [index: string]: any }> = {
     action: pagePropActions | EquationPropsActions
   ) => {
     switch (action.type) {
-      case Types.equation_changed:
+      case Types.EQUATION_CHANGED:
         return {...state, text:action.payload};// modify this
       case Types.MATH_TYPE_CHANGED:
         return {...state, mathType:action.payload}
