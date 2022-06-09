@@ -11,8 +11,9 @@ import { mathEquationIcon } from '../conts/base64Images';
 const NavBar: React.FC = () => {
 
   const { state, dispatch  } = React.useContext(AppContext);
-  
+
   const onChangeRadioF = (mathTypeString: string)=>{
+    
     const mathType = mathTypeString as Enums.MathTypes;
     dispatch({
       type: Types.MATH_TYPE_CHANGED,
@@ -23,7 +24,6 @@ const NavBar: React.FC = () => {
   let data = Enums.ListMathTypes.map((mathType)=>{
     return {"id": mathType, selected : mathType === state.EquationProps.mathType}
   })
-
 
 
   let mapData = data.map((mathTypes)=>{
@@ -66,12 +66,5 @@ const NavBar: React.FC = () => {
         </div>
   );
 };
-
-/*
-
-          <button className='navButton'>LaTEX</button>
-          <button className='navButton'>MathML</button>
-          <button className='navButton'>AsciiMath</button>
-*/
 
 export default NavBar;

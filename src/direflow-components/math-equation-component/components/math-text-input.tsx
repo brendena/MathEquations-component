@@ -5,10 +5,8 @@ import * as pngMeta from "@nashiinc/png-metadata/index.js"
 
 const MathTextInput: React.FC = () => {
   const { state ,dispatch } = React.useContext(AppContext);
-  console.log(state.EquationProps.text)
 
   const textUpdated = (e : React.ChangeEvent<HTMLTextAreaElement>)=>{
-    console.log(e.currentTarget.value);
     dispatch({type:Types.EQUATION_CHANGED, payload:e.currentTarget.value})
   }
 

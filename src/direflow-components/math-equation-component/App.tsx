@@ -1,10 +1,8 @@
-import React, { FC, useState, useRef } from 'react';
-import { EventContext, Styled } from 'direflow-component';
+import React, { FC } from 'react';
+import {  Styled } from 'direflow-component';
 import { AppProvider } from "./context";
-import { Types } from "./reducers";
 import MathEquationComponent from './components/math-equation-container';
 import * as Enums from "./conts/enums"
-import { AppContext } from "./context";
 import UpdateProps from './UpdateProps';
 
 
@@ -50,7 +48,7 @@ const App: FC<IProps> = (props) => {
 
 App.defaultProps = {
   color:"0xffffff",
-  height: 100,
+  height: 200,
   text:"",
   mathType:Enums.MathTypes.LaTEX,
   copyCustomEvent: false

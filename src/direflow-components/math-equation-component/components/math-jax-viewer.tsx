@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 //*
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJaxContext';
@@ -13,12 +13,21 @@ https://github.com/fast-reflexes/better-react-mathjax/issues/17
 try and fix the included src problem
 */
 
+interface errorMessageState  {
+  currentText :string
+  errorMessage : string;
+}
+
 
 const MathJaxViewer: React.FC = () => {
   const { state  } = React.useContext(AppContext);
+  //const [errorMessage,setErrorMessage] = useState<errorMessageState>({currentText:"",errorMessage:""});
   const {mathJaxConRef,canvasRef,addCanvasToClipboard,onDrag,onMouseDown } = useMathJaxImage();
 
-  const error = (err:any) =>{ console.log("############Error"); console.log(err)}
+  const error = (err:any) =>{ 
+    console.log("############Error"); console.log(err)
+
+  }
 
 
   let text = state.EquationProps.text; 
@@ -38,17 +47,26 @@ const MathJaxViewer: React.FC = () => {
       break;
   }
 
+  /*
+  if(errorMessage.errorMessage != "" &&
+    errorMessage.currentText != state.EquationProps.text)
+  {
+    setErrorMessage({currentText:"",errorMessage:""})
+  }
+  */
 
   return (
-    <div id="mathJaxViewer"  ref={mathJaxConRef} draggable={true} onDragStart={onDrag}  >
+    <div id="mathJaxViewer"  ref={mathJaxConRef} >
       <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
-      <div onMouseDown={onMouseDown}>
+
+      <div id="mathJaxTextContainer"onMouseDown={onMouseDown} onDragStart={onDrag}  draggable={true} className={"enableDrag"}>
           <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/gh/brendena/MathEquations-component/mathjax/mathJaxCompiled.js" >
-              <MathJax typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
+              <MathJax onError={error} typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
           </MathJaxContext>
       </div>
 
-      <canvas ref={canvasRef}>
+
+      <canvas ref={canvasRef} style={{"display":"none"}}>
 
       </canvas>
 

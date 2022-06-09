@@ -46,7 +46,7 @@ const mainReducer = (
 
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
-  console.log(state);
+  //console.log(state);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

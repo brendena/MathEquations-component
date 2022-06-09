@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { EventContext, Styled } from 'direflow-component';
 import { AppProvider } from "./context";
 import { Types } from "./reducers";
@@ -37,26 +37,25 @@ const UpdateProps: React.FC<Props> = ({props, children }) => {
     const [localProps,setLocalProps] = useState(props);
     let refTest = useRef(null)
   
-    if(!isEqualsJson(props,localProps))
-    {
-        if(props.color!= undefined){
-            dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:props.color});
+    useEffect(() => {
+        if(!isEqualsJson(props,localProps))
+        {
+            if(localProps.color != props.color && props.color!= undefined){
+                dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:props.color});
+            }
+            if(localProps.height != props.height && props.height != undefined){
+                dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:props.height});
+            }
+            if(localProps.mathType != props.mathType && props.mathType != undefined){
+                dispatch({type:Types.MATH_TYPE_CHANGED, payload:props.mathType});
+            }
+            if(localProps.text != props.text && props.text != undefined){
+                dispatch({type:Types.EQUATION_CHANGED, payload:props.text});
+            }
+            console.log(props)
+            setLocalProps(props);
         }
-        if(props.height!= undefined){
-            dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:props.height});
-        }
-        if(props.mathType != undefined){
-            dispatch({type:Types.MATH_TYPE_CHANGED, payload:props.mathType});
-        }
-        if(props.text != undefined){
-            dispatch({type:Types.EQUATION_CHANGED, payload:props.text});
-        }
-        setLocalProps(props)
-    }
-    
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n")
-    console.log(props)
-    
+    });
     return (
         <>
             {children}
