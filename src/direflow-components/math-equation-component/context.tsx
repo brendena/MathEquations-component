@@ -24,7 +24,7 @@ const initialState = {
       text: "",
       mathType: Enums.MathTypes.LaTEX,
       color: "#000000",
-      height: 200
+      height: 100
   }
 };
 

@@ -48,7 +48,7 @@ const App: FC<IProps> = (props) => {
 
 App.defaultProps = {
   color:"0xffffff",
-  height: 200,
+  height: 100,
   text:"",
   mathType:Enums.MathTypes.LaTEX,
   copyCustomEvent: false

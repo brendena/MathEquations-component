@@ -8,8 +8,8 @@ interface toolboxInterface
     copyEvent: () => void
 };
 
-const sizeLargeImage = 200;
-const sizeMediumImage = 100;
+const sizeLargeImage = 100;
+const sizeMediumImage = 50;
 const sizeSmallImage = 25;
 
 const Toolbox: React.FC<toolboxInterface> = (prop) => {
