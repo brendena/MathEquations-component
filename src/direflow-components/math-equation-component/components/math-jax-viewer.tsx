@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 //*
-import { MathJax, MathJaxContext } from 'better-react-mathjax';
-import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJaxContext';
-
+//import { MathJax, MathJaxContext } from 'better-react-mathjax';
+//import { MathJax, MathJaxContext } from 'better-react-mathjax/src';
+//import { TypesettingFunction } from 'better-react-mathjax/src/MathJ
+import { MathJax, MathJaxContext } from 'better-react-mathjax/build';
+import { TypesettingFunction } from 'better-react-mathjax/build/MathJaxContext/MathJaxContext';
 
 import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
 import { MathTypes } from '../conts/enums';
 import Toolbox from './toolbox';
+
+require("../../../../mathjax/mathJaxCompiled")
 /*
 https://github.com/fast-reflexes/better-react-mathjax/issues/17
 try and fix the included src problem
@@ -60,7 +64,7 @@ const MathJaxViewer: React.FC = () => {
       <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
 
       <div id="mathJaxTextContainer"onMouseDown={onMouseDown} onDragStart={onDrag}  draggable={true} className={"enableDrag"}>
-          <MathJaxContext   renderMode={"pre"} version={3} onError={error} src="https://cdn.jsdelivr.net/gh/brendena/MathEquations-component/mathjax/mathJaxCompiled.js" >
+          <MathJaxContext   renderMode={"pre"} version={3} onError={error} >
               <MathJax onError={error} typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
           </MathJaxContext>
       </div>
