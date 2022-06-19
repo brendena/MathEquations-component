@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
-import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../lib/convert"
+import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../library/convert"
 import { AppContext } from "../context";
 
 //need these becuase the version of typescript used here is fairly old
