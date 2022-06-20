@@ -38,7 +38,7 @@
     "@types/react": "16.9.3",
     "@types/react-dom": "16.9.1",
     "base-64": "^1.0.0",
-    "better-react-mathjax": "github:fast-reflexes/better-react-mathjax",
+    "better-react-mathjax": "github:brendena/better-react-mathjax",
     "canvg": "^4.0.0",
     "direflow-component": "3.5.5",
     "direflow-scripts": "3.5.5",
