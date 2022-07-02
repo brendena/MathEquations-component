@@ -30,14 +30,17 @@ Loader.preLoad(
 // (we set the mathjax path explicitly, since it defaults
 //  to the location from which this file is loaded)
 //
-const {insert} = require('mathjax-full/js/util/Options.js');
-insert(MathJax.config, {
-  
+/*
+
   loader: {
     paths: {
       mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5'
     }
   },
+*/
+
+const {insert} = require('mathjax-full/js/util/Options.js');
+insert(MathJax.config, {
 
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -51,6 +54,8 @@ insert(MathJax.config, {
 //   (the ones listed in the preLoad() call above)
 //
 require('mathjax-full/components/src/core/core.js');
+
+require('mathjax-full/components/src/a11y/assistive-mml/assistive-mml.js');
 
 require('mathjax-full/components/src/input/tex-full/tex-full.js');
 require('mathjax-full/components/src/input/tex/extensions/ams/ams.js');

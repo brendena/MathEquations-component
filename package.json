@@ -37,6 +37,7 @@
     "@types/node": "12.7.8",
     "@types/react": "16.9.3",
     "@types/react-dom": "16.9.1",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
     "base-64": "^1.0.0",
     "better-react-mathjax": "github:brendena/better-react-mathjax",
     "canvg": "^4.0.0",
