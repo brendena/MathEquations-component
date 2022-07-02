@@ -56,9 +56,13 @@ const NavBar: React.FC = () => {
             <button className='navButton' id="navButtonSettings">
               <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
             </button>
-            <button className='navButton' id="navButtonGithubLink">
-              <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
-            </button>
+            <a href={"https://github.com/brendena/MathEquations-component"} style={{"width":"100%"}}>
+              <button className='navButton' id="navButtonGithubLink">
+              
+                  <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
+                
+              </button>
+            </a>
             <button className='navButton' id="navButtonExitButton">
               <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
             </button>

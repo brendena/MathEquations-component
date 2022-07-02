@@ -44,6 +44,7 @@
 #mathExtensionGrid{
   position:fixed;
   display:grid;
+  z-index:20000;
   --length-ui: 600px;
 
 }

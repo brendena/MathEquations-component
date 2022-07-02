@@ -38,10 +38,6 @@ const MathTextInput: React.FC = () => {
           })
         }
       )
-      
-      //.arrayBuffer()
-
-
     }
   }
   return (

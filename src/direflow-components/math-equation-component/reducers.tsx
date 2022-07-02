@@ -24,6 +24,7 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export type pagePropType = {
     orientation: Enums.ORIENTATION;
+    copyCustomEvent: boolean;
   };
   
   type pagePropPayload = {
