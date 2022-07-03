@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquareXmark,faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons'
+import { faSquareXmark,faChevronDown, faGear,faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import RadioButtonInput from './radioButtonInput';
 import { AppContext } from "../context";
@@ -31,6 +31,17 @@ const NavBar: React.FC = () => {
 
   });
 
+  let minimizeUI = ()=>{
+    dispatch({
+      type: Types.CHANGE_UI_HIDE,
+      payload : true
+    });
+  }
+  let closeButton = ()=>{
+    let mathComponents = document.getElementsByTagName("math-equation-component");
+    
+    if(mathComponents.length > 0){ mathComponents[0].remove();}
+  }
   return (
 
         <div id="navBar">
@@ -50,21 +61,19 @@ const NavBar: React.FC = () => {
           <div className='flexSpacer'></div>
 
           <div className="navBarGroupButtons">
-            <button className='navButton' id="navButtonMinimize">
-              <FontAwesomeIcon icon={faChevronDown}  className="navButtonIcons"/>
+            <button className='navButton' id="navButtonMinimize" onClick={minimizeUI}>
+              <FontAwesomeIcon icon={faDownLeftAndUpRightToCenter}  className="navButtonIcons"/>
             </button>
             <button className='navButton' id="navButtonSettings">
               <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
             </button>
             <a href={"https://github.com/brendena/MathEquations-component"} style={{"width":"100%"}}>
               <button className='navButton' id="navButtonGithubLink">
-              
                   <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
-                
               </button>
             </a>
             <button className='navButton' id="navButtonExitButton">
-              <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons"/>
+              <FontAwesomeIcon icon={faSquareXmark}  className="navButtonIcons" onClick={closeButton}/>
             </button>
           </div>
         </div>

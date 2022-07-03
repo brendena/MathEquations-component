@@ -6,6 +6,7 @@ import { AppContext } from "../context";
 import { useMouseMove } from '../handles/userMouseResize';
 import { resizeIcon } from '../conts/base64Images';
 import NavBar from "./nav-bar"
+import MinimizedUI from './minimizedUI';
 
 const MathEquationComponent: React.FC = () => {
   let ref = useRef(null);
@@ -13,13 +14,23 @@ const MathEquationComponent: React.FC = () => {
   const { state  } = React.useContext(AppContext);
 
 
+  let hideMargin = "";
   let navBarPosition = ""
   if(state.pageProps.orientation === Enums.ORIENTATION.BOTTOM)
   {
     navBarPosition = "horizontal"
+    hideMargin = "marginBottom"
+    
   }
   else{
     navBarPosition = "vertical"
+    hideMargin = "marginRight"
+  }
+
+  let extensionGridStyles = {}
+  if(state.pageProps.hideUI)
+  {
+    extensionGridStyles = {[hideMargin]:"calc(var(--length-ui) * -1)"}
   }
 
 
@@ -30,8 +41,7 @@ const MathEquationComponent: React.FC = () => {
       <input id="V" type="checkbox" checked></input> 
       <input id="L" type="checkbox" checked></input>
         
-      <div id="mathExtensionGrid" className={navBarPosition} ref={ref} >
-
+      <div id="mathExtensionGrid" className={navBarPosition} ref={ref} style={extensionGridStyles}>
 
         <div id="textInputContainer">
           <MathTextInput></MathTextInput>
@@ -48,8 +58,12 @@ const MathEquationComponent: React.FC = () => {
           draggable={false}
           onMouseDown={()=>{mouseResizeStart()}}
           src={resizeIcon} />
-        
+
       </div>
+
+      <MinimizedUI></MinimizedUI>
+
+
   </>
   );
 };

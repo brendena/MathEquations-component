@@ -46,7 +46,7 @@
   display:grid;
   z-index:20000;
   --length-ui: 600px;
-
+  transition: margin 1s;
 }
 
 .horizontal {
@@ -173,8 +173,28 @@
     grid-template-columns: 1fr;
     grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
   }
-  
-
-
-  
 }
+
+
+
+#reducedUI{
+  width:var(--nav-bar-height);
+  position:fixed;
+  right:0px;
+  top:0px;
+
+  transition-property: margin;
+  transition-timing-function: ease-in-out;
+  transition-duration: 1s;
+  transition-delay: 1s;
+  margin-right: -75px;
+}
+
+
+
+.minimizedUIButtons{
+  width:var(--nav-bar-height);
+  height:var(--nav-bar-height);
+  background:var(--main-color)
+}
+

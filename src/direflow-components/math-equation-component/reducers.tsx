@@ -13,6 +13,7 @@ type ActionMap<M extends { [index: string]: any }> = {
   
   export enum Types {
     CHANGE_LAYOUT_ORIENTATION = "CHANGE_LAYOUT_ORIENTATION",
+    CHANGE_UI_HIDE = "CHANGE_UI_HIDE",
     EQUATION_CHANGED = "EQUATION_CHANGED",
     MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED",
     CHANGED_SIZE_COMPONENT = "CHANGED_SIZE_COMPONENT",
@@ -25,10 +26,12 @@ type ActionMap<M extends { [index: string]: any }> = {
   export type pagePropType = {
     orientation: Enums.ORIENTATION;
     copyCustomEvent: boolean;
+    hideUI: boolean;
   };
   
   type pagePropPayload = {
     [Types.CHANGE_LAYOUT_ORIENTATION]: Enums.ORIENTATION;
+    [Types.CHANGE_UI_HIDE]: boolean
   };
   
   export type pagePropActions = ActionMap<pagePropPayload>[keyof ActionMap<
@@ -46,6 +49,11 @@ type ActionMap<M extends { [index: string]: any }> = {
           orientation: action.payload,
           
         };
+      case Types.CHANGE_UI_HIDE:
+        return {
+          ...state,
+          hideUI: action.payload
+        }
       default:
         return state;
     }
