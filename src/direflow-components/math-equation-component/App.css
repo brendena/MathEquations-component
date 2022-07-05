@@ -182,6 +182,7 @@
   position:fixed;
   right:0px;
   top:0px;
+  z-index: 19000;
 
   transition-property: margin;
   transition-timing-function: ease-in-out;

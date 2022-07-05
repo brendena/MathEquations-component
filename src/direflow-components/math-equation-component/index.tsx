@@ -10,14 +10,6 @@ export default DireflowComponent.create({
   },
   plugins: [
     {
-      name: 'font-loader',
-      options: {
-        google: {
-          families: ['Advent Pro', 'Noto Sans JP'],
-        },
-      },
-    },
-    {
       name: 'polyfill-loader',
       options: {
         use: {

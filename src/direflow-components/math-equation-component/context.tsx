@@ -20,7 +20,7 @@ const initialState = {
     orientation: Enums.ORIENTATION.BOTTOM,
     copyCustomEvent: false,
     hideUI: false,
-    hideSettingsUI: false
+    hideSettingsUI: true
   },
   EquationProps: {
       text: "",
