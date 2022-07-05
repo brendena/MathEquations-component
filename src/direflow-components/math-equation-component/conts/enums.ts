@@ -1,6 +1,6 @@
 export enum ORIENTATION {
-    BOTTOM = 'r',
-    RIGHT = 'w'
+    BOTTOM = 'bottom',
+    RIGHT = 'right'
 }
 
 export enum MathTypes {

@@ -36,7 +36,6 @@
 
 
 .navButton{
-  display: block;
   align-items: center;
   display: flex;
 
@@ -82,7 +81,7 @@
 }
 
 
-input[type="radio"]:checked + label {
+input[type="radio"][name|="mathTypes"]:checked + label {
   background: var(--main-color-selected);
 }
 

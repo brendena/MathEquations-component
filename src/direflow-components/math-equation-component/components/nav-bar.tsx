@@ -42,6 +42,13 @@ const NavBar: React.FC = () => {
     
     if(mathComponents.length > 0){ mathComponents[0].remove();}
   }
+
+  let openSettings = ()=>{
+    dispatch({
+        type:Types.CHANGE_SETTINGS_HIDE, 
+        payload: false
+    });
+}
   return (
 
         <div id="navBar">
@@ -64,7 +71,7 @@ const NavBar: React.FC = () => {
             <button className='navButton' id="navButtonMinimize" onClick={minimizeUI}>
               <FontAwesomeIcon icon={faDownLeftAndUpRightToCenter}  className="navButtonIcons"/>
             </button>
-            <button className='navButton' id="navButtonSettings">
+            <button className='navButton' id="navButtonSettings" onClick={openSettings}>
               <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
             </button>
             <a href={"https://github.com/brendena/MathEquations-component"} style={{"width":"100%"}}>

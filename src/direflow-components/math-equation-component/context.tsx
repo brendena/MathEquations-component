@@ -19,7 +19,8 @@ const initialState = {
   pageProps: {
     orientation: Enums.ORIENTATION.BOTTOM,
     copyCustomEvent: false,
-    hideUI: false
+    hideUI: false,
+    hideSettingsUI: false
   },
   EquationProps: {
       text: "",
