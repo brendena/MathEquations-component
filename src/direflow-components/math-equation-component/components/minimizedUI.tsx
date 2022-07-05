@@ -21,6 +21,11 @@ const MinimizedUI: React.FC = () => {
     {
         styleShow={"margin":"0px"};
     }
+    let closeButton = ()=>{
+        let mathComponents = document.getElementsByTagName("math-equation-component");
+        
+        if(mathComponents.length > 0){ mathComponents[0].remove();}
+    }
 
     return (
       <div id="reducedUI" style={styleShow}>
@@ -37,7 +42,7 @@ const MinimizedUI: React.FC = () => {
             <FontAwesomeIcon icon={faMaximize}  className="navButtonIcons"/>
         </button>
     
-        <button className='navButton minimizedUIButtons' id="navButtonSettings">
+        <button className='navButton minimizedUIButtons' id="navButtonSettings" onClick={closeButton}>
             <FontAwesomeIcon icon={faSquareXmark} className="navButtonIcons"/>
         </button>
 

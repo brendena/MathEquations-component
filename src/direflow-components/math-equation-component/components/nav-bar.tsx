@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquareXmark,faChevronDown, faGear,faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
+import { faSquareXmark, faGear,faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import RadioButtonInput from './radioButtonInput';
 import { AppContext } from "../context";
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
 
 
   let mapData = data.map((mathTypes)=>{
-    return <RadioButtonInput key={mathTypes.id} forInput={mathTypes.id} checked={mathTypes.selected} name="mathTypes" classNameButton='navButton' onChange={onChangeRadioF}></RadioButtonInput>
+    return <RadioButtonInput key={mathTypes.id} forInput={mathTypes.id} checked={mathTypes.selected} name="mathTypes" classNameButton='navButton' onChange={onChangeRadioF} hideInput={true}></RadioButtonInput>
 
   });
 

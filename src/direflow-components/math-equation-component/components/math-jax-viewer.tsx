@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import { MathJax, MathJaxContext } from '../library/better-react-mathjax_build';
 import { TypesettingFunction } from '../library/better-react-mathjax_build/MathJaxContext/MathJaxContext';

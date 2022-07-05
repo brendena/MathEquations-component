@@ -17,7 +17,7 @@ type InitialStateType = {
 
 const initialState = {
   pageProps: {
-    orientation: Enums.ORIENTATION.RIGHT,
+    orientation: Enums.ORIENTATION.BOTTOM,
     copyCustomEvent: false,
     hideUI: false
   },

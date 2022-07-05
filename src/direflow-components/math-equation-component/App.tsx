@@ -8,6 +8,7 @@ import UpdateProps from './UpdateProps';
 
 import appStyles from './App.css';
 import navStyles from "./nav.css";
+import settingStyles from "./setting.css";
 import toolbarStyles from "./toolbar.css"
 /* i can add multiple styles here */
 
@@ -34,7 +35,7 @@ const App: FC<IProps> = (props) => {
   */
   return (
     <AppProvider>
-      <Styled styles={[navStyles,appStyles,toolbarStyles]} scoped={false}>
+      <Styled styles={[navStyles,appStyles,settingStyles, toolbarStyles]} scoped={false}>
         <UpdateProps props={props}>
           <div> 
             <MathEquationComponent></MathEquationComponent>

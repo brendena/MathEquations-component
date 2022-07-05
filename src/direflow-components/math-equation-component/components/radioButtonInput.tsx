@@ -5,6 +5,7 @@ interface RadioButtonProps {
     checked:boolean,
     name:string,
     classNameButton:string,
+    hideInput:boolean,
     onChange:(a: string) => void;
 }
 
@@ -14,7 +15,7 @@ interface RadioButtonProps {
 const RadioButtonInput: React.FC<RadioButtonProps> = (props) => {
   return (
     < >
-      <input  type="radio" id={props.forInput + "_Button"} name="amount" style={{display:"none"}} defaultChecked={props.checked} onChange={(event)=>{props.onChange(props.forInput); }} />
+      <input  type="radio" id={props.forInput + "_Button"} name={props.name} hidden={props.hideInput}  defaultChecked={props.checked} onChange={(event)=>{props.onChange(props.forInput); }} />
       <label htmlFor={props.forInput + "_Button"} className={props.classNameButton} >{props.forInput}  </label>
     </>
   );

@@ -1,0 +1,19 @@
+#PopUpUiContainer
+{
+  z-index: 3000000;
+  position:fixed;
+  width: 90%;
+  transition: .5s;
+  bottom: 0;
+  left:5%;
+  background:white;
+  border:solid 5px;
+  border-bottom: 0px;
+}
+
+
+#closeSettings{
+    position:absolute;
+    right:20px;
+    font-size: 30px;
+}
