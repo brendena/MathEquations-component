@@ -1,8 +1,5 @@
-import React, { FC, useState, useRef, useEffect } from 'react';
-import { EventContext, Styled } from 'direflow-component';
-import { AppProvider } from "./context";
+import React, { useState, useRef, useEffect } from 'react';
 import { Types } from "./reducers";
-import MathEquationComponent from './components/math-equation-container';
 import * as Enums from "./conts/enums"
 import { AppContext } from "./context";
 
@@ -33,29 +30,28 @@ interface Props {
 
 const UpdateProps: React.FC<Props> = ({props, children }) => {
     
-    const { state, dispatch } = React.useContext(AppContext);
+    const { dispatch } = React.useContext(AppContext);
     const [localProps,setLocalProps] = useState(props);
-    let refTest = useRef(null)
-  
+
     useEffect(() => {
         if(!isEqualsJson(props,localProps))
         {
-            if(localProps.color != props.color && props.color!= undefined){
+            if(localProps.color !== props.color && props.color!== undefined){
                 dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:props.color});
             }
-            if(localProps.height != props.height && props.height != undefined){
+            if(localProps.height !== props.height && props.height !== undefined){
                 dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:props.height});
             }
-            if(localProps.mathType != props.mathType && props.mathType != undefined){
+            if(localProps.mathType !== props.mathType && props.mathType !== undefined){
                 dispatch({type:Types.MATH_TYPE_CHANGED, payload:props.mathType});
             }
-            if(localProps.text != props.text && props.text != undefined){
+            if(localProps.text !== props.text && props.text !== undefined){
                 dispatch({type:Types.EQUATION_CHANGED, payload:props.text});
             }
             console.log(props)
             setLocalProps(props);
         }
-    });
+    },[props, localProps, dispatch]);
     return (
         <>
             {children}

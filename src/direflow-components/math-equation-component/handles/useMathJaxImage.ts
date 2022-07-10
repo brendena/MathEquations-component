@@ -59,7 +59,7 @@ async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCa
   drawMathJaxToCanvas(mathJax,canvas,height, color);
   let pngImage = await convertCanvasToPNG_Uint8(canvas);
   
-  if(pngImage.length == 0)
+  if(pngImage.length === 0)
   {
     throw "image wasen't created"
   }
