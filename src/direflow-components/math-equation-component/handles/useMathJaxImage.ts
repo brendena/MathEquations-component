@@ -1,4 +1,5 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useContext} from 'react';
+import { EventContext } from 'direflow-component';
 import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
 import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../library/convert"
@@ -61,7 +62,7 @@ async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCa
   
   if(pngImage.length === 0)
   {
-    throw "image wasen't created"
+    throw Error("image wasen't created");
   }
 
   //get the metadata then 
@@ -77,6 +78,7 @@ async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCa
 
 export function useMathJaxImage()
 {
+    const webComponentDispatch = useContext(EventContext);
     const { state  } = React.useContext(AppContext);
     let mathJaxConRef = useRef<HTMLDivElement>(null);
     let canvasRef = useRef<HTMLCanvasElement>(null);
@@ -101,7 +103,7 @@ export function useMathJaxImage()
                   "equationProps": state.EquationProps
                 }
               });
-              mathJaxConRef.current.dispatchEvent(event);   
+              webComponentDispatch(event);   
               console.log("sent event")
             }
             else{

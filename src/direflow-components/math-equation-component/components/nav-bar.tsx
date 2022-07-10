@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareXmark, faGear,faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -7,10 +7,12 @@ import { AppContext } from "../context";
 import { Types } from '../reducers';
 import * as Enums from '../conts/enums'
 import { mathEquationIcon } from '../conts/base64Images';
+import { EventContext } from 'direflow-component';
 
 const NavBar: React.FC = () => {
 
   const { state, dispatch  } = React.useContext(AppContext);
+  const webComponentDispatch = useContext(EventContext);
 
   const onChangeRadioF = (mathTypeString: string)=>{
     
@@ -40,6 +42,13 @@ const NavBar: React.FC = () => {
   let closeButton = ()=>{
     let mathComponents = document.getElementsByTagName("math-equation-component");
     
+    const event = new CustomEvent('math-equation-exit', {
+        bubbles: true,
+        cancelable: false,
+        composed: true
+    });
+    webComponentDispatch(event);
+
     if(mathComponents.length > 0){ mathComponents[0].remove();}
   }
 
@@ -75,7 +84,7 @@ const NavBar: React.FC = () => {
               <FontAwesomeIcon icon={faGear} className="navButtonIcons"/>
             </button>
             <a href={"https://github.com/brendena/MathEquations-component"} style={{"width":"100%"}}>
-              <button className='navButton' id="navButtonGithubLink">
+              <button className='navButton' id="navButtonGithubLink" style={{"width":"100%","height":"100%"}}>
                   <FontAwesomeIcon icon={faGithub} className="navButtonIcons"/>
               </button>
             </a>

@@ -55,6 +55,7 @@
 .navBarGroupButtons{
   display: flex;
   width:   var(--navBar-group-width);
+  height: 100%;
 }
 
 /*don't know why i need this else the for the icons */

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { EventContext } from 'direflow-component';
 import { AppContext } from "../context";
 import RadioButtonInput from './radioButtonInput';
 import { ORIENTATION } from '../conts/enums';
@@ -6,6 +7,7 @@ import { Types } from "../reducers";
 
 const SettingUI: React.FC = () => {
     const { state, dispatch  } = React.useContext(AppContext);
+    const webComponentDispatch = useContext(EventContext);
 
     let orientations = [
         ORIENTATION.BOTTOM,
@@ -18,7 +20,7 @@ const SettingUI: React.FC = () => {
         });
     }
 
-    let mapData = orientations.map((orientation)=>{
+    let mapOrientationData = orientations.map((orientation)=>{
         let checked = state.pageProps.orientation === orientation;
         return <RadioButtonInput key={orientation} forInput={orientation} checked={checked} name="orientation" onChange={()=>{onChangeRadioF(orientation)}} classNameButton="" hideInput={false}></RadioButtonInput>
     });
@@ -38,14 +40,26 @@ const SettingUI: React.FC = () => {
         hideStyles={"bottom":"-100%","transition-timing-function":"ease-in"}
     }
 
+    
+    let changeSettings = ()=>{
+        const event = new CustomEvent('math-equation-gen-save', {
+            bubbles: true,
+            cancelable: false,
+            composed: true,
+            detail : {
+                "orientation":state.pageProps.orientation
+            }
+        });
+        webComponentDispatch(event);
+    }
 
     return (
         <div id="PopUpUiContainer" style={hideStyles}>
             <span id="closeSettings" onClick={closeSettings}>x</span>
-            <h2>Settings</h2>
+            <h2>Settings <button id="saveSettingsButton" onClick={changeSettings}>Save</button> </h2>
             <div>
                 <span>UI orientation: </span>
-                {mapData}
+                {mapOrientationData}
             </div>
             <hr></hr>
         </div>

@@ -14,7 +14,6 @@ export function useMouseMove(ref: React.MutableRefObject<null>)
     let current : any = ref.current
     if(current  != null)
     {
-      console.log(pos.clientY + " "  + pos.clientX)
       let widthOrHeight = 0;
       let addAmount = 0;
       
@@ -31,7 +30,6 @@ export function useMouseMove(ref: React.MutableRefObject<null>)
     }
   }
   const mouseResizeStart = ()=>{
-    console.log("resize started");
     document.body.addEventListener("mousemove", mouseMove)
     document.body.addEventListener("mouseup", ()=>{
       document.body.removeEventListener("mousemove",mouseMove,false);
