@@ -19,9 +19,10 @@ interface IProps {
   text: string;
   mathType: Enums.MathTypes;
   color: string;
-  height: number
+  height: number;
 //pageProp
   copyCustomEvent: boolean
+  orientation: Enums.ORIENTATION;
 }
 
 interface Props {
@@ -47,6 +48,12 @@ const UpdateProps: React.FC<Props> = ({props, children }) => {
             }
             if(localProps.text !== props.text && props.text !== undefined){
                 dispatch({type:Types.EQUATION_CHANGED, payload:props.text});
+            }
+            if(localProps.orientation !== props.orientation && props.orientation !== undefined){
+                dispatch({type:Types.CHANGE_LAYOUT_ORIENTATION, payload:props.orientation});
+            }
+            if(localProps.copyCustomEvent !== props.copyCustomEvent && props.copyCustomEvent !== undefined){
+                dispatch({type:Types.CHANGE_UI_HIDE, payload:props.copyCustomEvent});
             }
             console.log(props)
             setLocalProps(props);

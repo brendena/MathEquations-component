@@ -18,9 +18,10 @@ interface IProps {
   text: string;
   mathType: Enums.MathTypes;
   color: string;
-  height: number
+  height: number;
 //pageProp
-  copyCustomEvent: boolean
+  copyCustomEvent: boolean;
+  orientation: Enums.ORIENTATION;
 }
 
 const App: FC<IProps> = (props) => {
@@ -52,7 +53,8 @@ App.defaultProps = {
   height: 100,
   text:"",
   mathType:Enums.MathTypes.LaTEX,
-  copyCustomEvent: false
+  copyCustomEvent: false,
+  orientation: Enums.ORIENTATION.BOTTOM
 }
 
 
