@@ -47,6 +47,8 @@
   z-index:20000;
   --length-ui: 600px;
   transition: margin 1s;
+  min-height:100px;
+  min-width:100px;
 }
 
 .horizontal {

@@ -3,6 +3,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AppContext } from "../context";
 import { Types } from "../reducers";
+import { horizontalLock, verticalLock } from "../conts/base64Images";
 interface toolboxInterface
 {
     copyEvent: () => void
@@ -50,13 +51,27 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       <button className={smallSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeSmallImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'10px'}} />
       </button>
-      <input type="number"
-             style={{"maxWidth":"50px"}} 
-             value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
-      </input>
-      <span>
-        px height
-      </span>
+      <div style={{"display":"flex", 
+                   "alignItems":"center"}} >
+        <input type="number"
+              style={{"maxWidth":"50px"}} 
+              value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+        </input>
+        <span>
+          h
+        </span>
+      
+
+        <img src={verticalLock} style={{"maxHeight":"30px"}}></img>
+        <input type="number"
+              style={{"maxWidth":"50px"}} 
+              value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+        </input>
+        <span>
+          w
+        </span>
+        <img src={horizontalLock} style={{"maxHeight":"30px"}}></img>
+      </div>
     </div>
 );
 };

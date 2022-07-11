@@ -22,15 +22,8 @@ const SettingUI: React.FC = () => {
 
     let mapOrientationData = orientations.map((orientation)=>{
         let checked = state.pageProps.orientation === orientation;
-
-        console.log(checked)
-        console.log(state.pageProps.orientation)
-        console.log("-----------------------" + orientation)
-
         return <RadioButtonInput key={orientation} forInput={orientation} checked={checked} name="orientation" onChange={()=>{onChangeRadioF(orientation)}} classNameButton="" hideInput={false}></RadioButtonInput>
     });
-
-    console.log(mapOrientationData)
 
 
 
@@ -44,7 +37,7 @@ const SettingUI: React.FC = () => {
     let hideStyles = {};
     if(state.pageProps.hideSettingsUI)
     {
-        hideStyles={"bottom":"-100%","transition-timing-function":"ease-in"}
+        hideStyles={"bottom":"-100%","transitionTimingFunction":"ease-in"}
     }
 
     
