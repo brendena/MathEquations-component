@@ -4,24 +4,8 @@ import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
 import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../library/convert"
 import { AppContext } from "../context";
-
-//need these becuase the version of typescript used here is fairly old
-interface ClipboardItem {
-    readonly types: string[];
-    readonly presentationStyle: "unspecified" | "inline" | "attachment";
-    getType(): Promise<Blob>;
-  }
-  
-  interface ClipboardItemData {
-    [mimeType: string]: any;
-  }
-  
-  declare var ClipboardItem: {
-    prototype: ClipboardItem;
-    new (itemData: ClipboardItemData): ClipboardItem;
-  };
-
-
+import { useMathJaxCopy }  from "./useMathJaxCopy"
+import { useMathJaxDrag } from "./useMathJaxDrag"
 
 
 
@@ -96,61 +80,24 @@ export function useMathJaxImage()
     const width  = state.EquationProps.width;
     const lockedHeight = state.EquationProps.lockHeight;
     const lockedWidth  = state.EquationProps.lockWidth;
-    const customCopyEvent = state.pageProps.copyCustomEvent; 
-    
-    async function addCanvasToClipboard()
-    {
-        if(mathJaxConRef?.current && canvasRef?.current){
 
-            drawMathJaxToCanvas(mathJaxConRef.current, canvasRef.current, height, width, lockedHeight,lockedWidth, color);
-            const blob = await convertCanvasToPNG_Blob(canvasRef.current);
-            if(customCopyEvent)
-            {
-              const event = new CustomEvent('math-equation-gen-image', {
-                bubbles: true,
-                cancelable: false,
-                composed: true,
-                detail : {
-                  "blob":blob,
-                  "equationProps": state.EquationProps
-                }
-              });
-              webComponentDispatch(event);   
-              console.log("sent event")
-            }
-            else{
-              let clipboard :any = navigator.clipboard;
-              clipboard.write([
-                new ClipboardItem({
-                  "image/png": blob
-                })
-              ]);
-            }
-
-        }
-    }
-
-    //
-    async function onMouseDown(event : React.MouseEvent){
-      if(mathJaxConRef?.current && canvasRef?.current){
+    let createMaxJaxImage = async ()=>{
+      if(mathJaxConRef?.current && canvasRef?.current)
+      {
         drawMathJaxToCanvas(mathJaxConRef.current, canvasRef.current, height, width, lockedHeight,lockedWidth, color);
         const blob = await convertCanvasToPNG_Blob(canvasRef.current);
-        let test  = await convert_blobToBase64String(blob) as string;
-        setImage(test);
+        return blob;
       }
+
+      console.log("noooo")
+      throw Error("the reference wasen't defined");
     }
 
-    //onDrag can't be async
-    function onDrag(event : React.DragEvent<HTMLDivElement>) {
-      const d = new Date(); //this seems to slow it down so i can use it 
-      var imageDiv = document.createElement("img");
-      imageDiv.src = image;
-      var wrapper = document.createElement("div");
-      wrapper.appendChild(imageDiv);
-      event.dataTransfer.setData("text/html",wrapper.innerHTML.toString());
-      event.dataTransfer.setDragImage(imageDiv, 0,0)
-    
-    }
+
+    const addCanvasToClipboard =  useMathJaxCopy(createMaxJaxImage);
+    const [onDrag, onMouseDown] = useMathJaxDrag(createMaxJaxImage);
+
+
 
     
 
