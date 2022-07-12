@@ -25,16 +25,12 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
   }
 
   let changeWidthImage = (width:number)=>{
-    dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:width})
+    dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:width})
   }
 
-  let toggleHeightLock = ()=>{
-    if(state.EquationProps.lockHeight === false || state.EquationProps.lockWidth === true)
+
+  let toggleLockedParam = ()=>{
       dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload:!state.EquationProps.lockHeight})
-  }
-
-  let toggleWidthLock = ()=>{
-    if(state.EquationProps.lockWidth === false || state.EquationProps.lockHeight === true)
       dispatch({type:Types.CHANGE_WIDTH_LOCK, payload:!state.EquationProps.lockWidth})
   }
 
@@ -87,12 +83,12 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
 
 
 
-        <img src={verticalLock} style={{"maxHeight":"30px"}} className={heightLockSelected} onClick={toggleHeightLock}></img>
+        <img src={verticalLock} style={{"maxHeight":"30px"}} className={heightLockSelected} onClick={toggleLockedParam}></img>
         {state.EquationProps.lockWidth &&
             <>
               <input type="number"
                      style={{"maxWidth":"50px"}} 
-                     value={state.EquationProps.width} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+                     value={state.EquationProps.width} onChange={(e)=>{changeWidthImage(parseInt(e.currentTarget.value))}}>
               </input>
               <span>
                 w
@@ -100,7 +96,7 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
             </>
         }
 
-        <img src={horizontalLock} style={{"maxHeight":"30px"}} className={widthLockSelected} onClick={toggleWidthLock}></img>
+        <img src={horizontalLock} style={{"maxHeight":"30px"}} className={widthLockSelected} onClick={toggleLockedParam}></img>
       </div>
     </div>
 );

@@ -25,7 +25,7 @@ interface ClipboardItem {
 
 
 
-function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height:number, color : string )
+function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height:number, width:number, lockedHeight:boolean, lockedWidth:boolean, color : string )
 {
 
 
@@ -42,9 +42,17 @@ function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement
       svg.style.color= color;
       let widthSVG : number = svg.width.animVal.valueInSpecifiedUnits
       let heightSVG : number = svg.height.animVal.valueInSpecifiedUnits 
-      let ratioSvg = widthSVG/heightSVG;
       
-      svg.setAttribute("width",(height * ratioSvg) + "px");
+      
+      if(!lockedWidth){
+        width = height * (widthSVG/heightSVG);
+      }
+      else if(!lockedHeight){
+        height = width *  (heightSVG/widthSVG);
+      }
+
+
+      svg.setAttribute("width", width  + "px");
       svg.setAttribute("height",height + "px");
 
 
@@ -55,9 +63,8 @@ function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement
 }
 
 
-async function convertMathJaxToPNG_Blob(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height : number, color : string )
+async function convertCanvasToPNG_Blob(canvas : HTMLCanvasElement)
 {
-  drawMathJaxToCanvas(mathJax,canvas,height, color);
   let pngImage = await convertCanvasToPNG_Uint8(canvas);
   
   if(pngImage.length === 0)
@@ -84,14 +91,19 @@ export function useMathJaxImage()
     let canvasRef = useRef<HTMLCanvasElement>(null);
     const [image,setImage] = useState("");
 
+    const color  = state.EquationProps.color;
     const height = state.EquationProps.height;
-    const color = state.EquationProps.color;
+    const width  = state.EquationProps.width;
+    const lockedHeight = state.EquationProps.lockHeight;
+    const lockedWidth  = state.EquationProps.lockWidth;
     const customCopyEvent = state.pageProps.copyCustomEvent; 
     
     async function addCanvasToClipboard()
     {
         if(mathJaxConRef?.current && canvasRef?.current){
-            const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current, height, color);
+
+            drawMathJaxToCanvas(mathJaxConRef.current, canvasRef.current, height, width, lockedHeight,lockedWidth, color);
+            const blob = await convertCanvasToPNG_Blob(canvasRef.current);
             if(customCopyEvent)
             {
               const event = new CustomEvent('math-equation-gen-image', {
@@ -121,9 +133,9 @@ export function useMathJaxImage()
     //
     async function onMouseDown(event : React.MouseEvent){
       if(mathJaxConRef?.current && canvasRef?.current){
-        const blob = await convertMathJaxToPNG_Blob(mathJaxConRef.current, canvasRef.current, height, color);
+        drawMathJaxToCanvas(mathJaxConRef.current, canvasRef.current, height, width, lockedHeight,lockedWidth, color);
+        const blob = await convertCanvasToPNG_Blob(canvasRef.current);
         let test  = await convert_blobToBase64String(blob) as string;
-        console.log(test)
         setImage(test);
       }
     }
