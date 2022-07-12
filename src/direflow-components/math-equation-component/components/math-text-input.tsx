@@ -43,6 +43,7 @@ const MathTextInput: React.FC = () => {
   }
   let onPaste = (e: React.ClipboardEvent)=>{
     let test =e.clipboardData.getData('text');
+
     let html =e.clipboardData.getData('text/html');
     let files =e.clipboardData.getData('Files');
     let image =e.clipboardData.getData("image/png")
@@ -51,19 +52,31 @@ const MathTextInput: React.FC = () => {
     console.log(image)
     console.log(html);
     console.log(files)
+    if(!e.clipboardData.types.includes('text/plain'))
+    {
+      if(e.clipboardData.types.includes('text/html')){
+        var el = document.createElement( 'html' );
+        el.innerHTML = e.clipboardData.getData('text/html');
+        let images = el.getElementsByTagName( 'img' );
+        if(images.length == 1)
+        {
+          console.log()
+          fetch(images[0].src).then((response)=>{
+            response.blob().then((blob)=>{
+              blob.arrayBuffer().then((blobArray)=>{
+                const blob8 = new Uint8Array(blobArray);
+                let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
+                console.log(metaData)
+              });  
+            });
+          }); 
+        }
+      }
+  
+      e.preventDefault();
+    }
 
-    fetch("https://lh3.googleusercontent.com/vzMrcE4h69s8gMsHAYrqo3aDd63Q8U8O7DEH3WedfEMnvOVX3Bne7pc2PxBviZ8Ln8861m0WJLB-Z0_6zMu57JOGPGJ5-fFvdw-SSIRqZkACuN5xNaWGeWz40o3euTPLpCOrLYHeWSF0hF1sZ8o").then((response)=>{
-      response.blob().then((blob)=>{
-        blob.arrayBuffer().then((blobArray)=>{
-          const blob8 = new Uint8Array(blobArray);
-          let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
-          console.log(metaData)
-        });
-        
-      });
-    }); 
 
-    e.preventDefault();
   }
 
   return (

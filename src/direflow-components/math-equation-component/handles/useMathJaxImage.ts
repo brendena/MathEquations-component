@@ -73,7 +73,6 @@ export function useMathJaxImage()
     const { state  } = React.useContext(AppContext);
     let mathJaxConRef = useRef<HTMLDivElement>(null);
     let canvasRef = useRef<HTMLCanvasElement>(null);
-    const [image,setImage] = useState("");
 
     const color  = state.EquationProps.color;
     const height = state.EquationProps.height;
