@@ -19,7 +19,10 @@ type ActionMap<M extends { [index: string]: any }> = {
     MATH_TYPE_CHANGED = "MATH_TYPE_CHANGED",
     CHANGED_SIZE_COMPONENT = "CHANGED_SIZE_COMPONENT",
     CHANGE_EQUATION_COLOR = "CHANGE_EQUATION_COLOR",
-    CHANGE_EQUATION_HEIGHT = "CHANGE_EQUATION_HEIGHT"
+    CHANGE_EQUATION_HEIGHT = "CHANGE_EQUATION_HEIGHT",
+    CHANGE_EQUATION_WIDTH = "CHANGE_EQUATION_WIDTH",
+    CHANGE_HEIGHT_LOCK = "CHANGE_HEIGHT_LOCK",
+    CHANGE_WIDTH_LOCK = "CHANGE_WIDTH_LOCK"  
   }
   
   // pageProp
@@ -73,7 +76,10 @@ type ActionMap<M extends { [index: string]: any }> = {
     text: string;
     mathType: Enums.MathTypes;
     color: string;
-    height: number
+    height: number;
+    lockWidth: boolean;
+    width: number;
+    lockHeight:boolean;
   };
   
 
@@ -82,6 +88,9 @@ type ActionMap<M extends { [index: string]: any }> = {
     [Types.MATH_TYPE_CHANGED]: Enums.MathTypes;
     [Types.CHANGE_EQUATION_COLOR]: string;
     [Types.CHANGE_EQUATION_HEIGHT]: number;
+    [Types.CHANGE_EQUATION_WIDTH]: number;
+    [Types.CHANGE_WIDTH_LOCK]: boolean;
+    [Types.CHANGE_HEIGHT_LOCK]: boolean;
   };
   
   export type EquationPropsActions = ActionMap<
@@ -101,6 +110,12 @@ type ActionMap<M extends { [index: string]: any }> = {
         return {...state, color:action.payload}
       case Types.CHANGE_EQUATION_HEIGHT:
         return {...state, height:action.payload}
+      case Types.CHANGE_EQUATION_WIDTH:
+        return {...state, width:action.payload}
+      case Types.CHANGE_WIDTH_LOCK:
+        return {...state, lockWidth:action.payload}
+      case Types.CHANGE_HEIGHT_LOCK:
+        return {...state, lockHeight:action.payload}
       default:
         return state;
     }

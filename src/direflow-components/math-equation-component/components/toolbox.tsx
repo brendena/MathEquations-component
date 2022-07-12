@@ -24,16 +24,36 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
     dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:height})
   }
 
+  let changeWidthImage = (width:number)=>{
+    dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:width})
+  }
+
+  let toggleHeightLock = ()=>{
+    if(state.EquationProps.lockHeight === false || state.EquationProps.lockWidth === true)
+      dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload:!state.EquationProps.lockHeight})
+  }
+
+  let toggleWidthLock = ()=>{
+    if(state.EquationProps.lockWidth === false || state.EquationProps.lockHeight === true)
+      dispatch({type:Types.CHANGE_WIDTH_LOCK, payload:!state.EquationProps.lockWidth})
+  }
+
+
   let largeSelected = "";
   let mediumSelected = "";
   let smallSelected = "";
   if(state.EquationProps.height >= sizeLargeImage){
-    largeSelected = "sizeSelected"
+    largeSelected = "toolBoxSelected"
   }else if(state.EquationProps.height >= sizeMediumImage){
-    mediumSelected = "sizeSelected"
+    mediumSelected = "toolBoxSelected"
   }else{
-    smallSelected = "sizeSelected"
+    smallSelected = "toolBoxSelected"
   }
+
+  let heightLockSelected = "";
+  let widthLockSelected = "";
+  if(state.EquationProps.lockHeight) heightLockSelected = "toolBoxSelected";
+  if(state.EquationProps.lockWidth)  widthLockSelected = "toolBoxSelected";
 
   return (
     <div id="toolbox">
@@ -53,24 +73,34 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       </button>
       <div style={{"display":"flex", 
                    "alignItems":"center"}} >
-        <input type="number"
-              style={{"maxWidth":"50px"}} 
-              value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
-        </input>
-        <span>
-          h
-        </span>
-      
+        {state.EquationProps.lockHeight &&
+            <>
+              <input type="number"
+                      style={{"maxWidth":"50px"}} 
+                      value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+              </input>
+              <span>
+                h
+              </span>
+            </>    
+        }
 
-        <img src={verticalLock} style={{"maxHeight":"30px"}}></img>
-        <input type="number"
-              style={{"maxWidth":"50px"}} 
-              value={state.EquationProps.height} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
-        </input>
-        <span>
-          w
-        </span>
-        <img src={horizontalLock} style={{"maxHeight":"30px"}}></img>
+
+
+        <img src={verticalLock} style={{"maxHeight":"30px"}} className={heightLockSelected} onClick={toggleHeightLock}></img>
+        {state.EquationProps.lockWidth &&
+            <>
+              <input type="number"
+                     style={{"maxWidth":"50px"}} 
+                     value={state.EquationProps.width} onChange={(e)=>{changeHeightImage(parseInt(e.currentTarget.value))}}>
+              </input>
+              <span>
+                w
+              </span>
+            </>
+        }
+
+        <img src={horizontalLock} style={{"maxHeight":"30px"}} className={widthLockSelected} onClick={toggleWidthLock}></img>
       </div>
     </div>
 );

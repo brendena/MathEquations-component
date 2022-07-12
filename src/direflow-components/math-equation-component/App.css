@@ -3,6 +3,7 @@
   --main-color-selected: #e4c56d;
   --alt-color: #8064d6;
   --text-background: white;
+  --toolbox-selected: #b9b9b9;
   --font-color: black;
   --clear: rgba(0,0,0,0);
   user-select: none; /*used to disable all the weird effect that the movible nav creates*/

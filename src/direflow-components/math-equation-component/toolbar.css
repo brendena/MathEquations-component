@@ -1,11 +1,11 @@
 #toolbox{
   width:100%;
   background-color: #ebebeb9e;
-  padding:10px;
   margin-bottom:10px;
   display:flex;
   align-items: center;
   flex-wrap: wrap;
+  min-height:50px;
 }
 
 .buttonOptionsImage{
@@ -32,6 +32,6 @@
   display: inline-block; 
 }
 
-.sizeSelected {
-  background-color: #b9b9b9;
+.toolBoxSelected {
+  background-color: var(--toolbox-selected);
 }
