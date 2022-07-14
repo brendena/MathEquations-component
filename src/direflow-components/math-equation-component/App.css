@@ -168,10 +168,46 @@
 
 
 
-@media  screen and (max-width: 700px) { 
-  #mathExtensionGrid.horizontal{
+@media  screen and (max-width: 700px) 
+{ 
+  .horizontal {
     grid-template-columns: 1fr;
-    grid-template-rows: var(--nav-bar-height) 100px 1fr 1fr;
+    grid-template-rows: 3fr auto  1fr;
+  }
+
+  .horizontal > #textInputContainer
+  {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+
+  .horizontal > #textOutput{
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+    min-height:200px;
+  }
+
+
+  .horizontal > #navBar{
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+
+    background: var(--main-color);
+    display:flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width:100vw;
+  }
+
+  .horizontal .navButton{
+    width: 100%;
+    justify-content: center;
+  }
+  .horizontal .navBarGroupButtons {
+    width: 100%;
+  }
+  .horizontal #logoContainer {
+    display:none;
   }
 }
 
