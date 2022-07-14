@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mathjax-full": "^3.2.1"
+    "mathjax-full": "3.2.2"
   },
   "devDependencies": {
     "webpack": "^5.72.1",

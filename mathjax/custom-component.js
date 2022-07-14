@@ -4,52 +4,7 @@
 //
 require('mathjax-full/components/src/startup/lib/startup.js');
 
-//
-//  Get the loader module and indicate the modules that
-//  will be loaded by hand below
-//
-const {Loader} = require('mathjax-full/js/components/loader.js');
-Loader.preLoad(
-  'loader', 'startup',
-  'core',
-  'input/tex-full',
-  '[tex]/ams',
-  '[tex]/newcommand',
-  '[tex]/configmacros',
-  '[tex]/action',
 
-  'input/mml',
-  'input/asciimath',
-  
-  'output/svg', 'output/svg/fonts/tex.js',
-  'ui/menu'
-);
-
-//
-// Update the configuration to include any needed values
-// (we set the mathjax path explicitly, since it defaults
-//  to the location from which this file is loaded)
-//
-/*
-
-  loader: {
-    paths: {
-      mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5'
-    }
-  },
-*/
-
-const {insert} = require('mathjax-full/js/util/Options.js');
-insert(MathJax.config, {
-
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    packages: {'[+]': ['ams', 'newcommand', 'configmacros', 'action']}
-  },
-  
-}, false);
-
-//
 // Load the components that we want to combine into one component
 //   (the ones listed in the preLoad() call above)
 //
@@ -73,8 +28,49 @@ require('mathjax-full/components/src/input/mml/mml.js');
 require('mathjax-full/components/src/input/asciimath/asciimath.js');
 
 
+
+
+//
+//  Get the loader module and indicate the modules that
+//  will be loaded by hand below
+//
+const {Loader} = require('mathjax-full/js/components/loader.js');
+Loader.preLoad(
+  'loader', 'startup',
+  'core',
+  'input/tex-full',
+  '[tex]/ams',
+  '[tex]/newcommand',
+  '[tex]/configmacros',
+  '[tex]/action',
+
+  'input/mml',
+  'input/asciimath',
+  
+  'output/svg', 'output/svg/fonts/tex.js',
+  'ui/menu'
+);
+
+
+
+
+const {insert} = require('mathjax-full/js/util/Options.js');
+insert(MathJax.config, {
+
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    packages: {'[+]': ['ams', 'newcommand', 'configmacros', 'action']},
+    
+  }
+  
+}, false);
+//formatError:(jax,err) =>{ console.log("there was a error") }
+
+
+
+
 //
 // Loading this component will cause all the normal startup
-//   operations to be performed when this component is loaded
+//   operations to be performed
 //
 require('mathjax-full/components/src/startup/startup.js');

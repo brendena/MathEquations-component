@@ -1,5 +1,5 @@
 import React from 'react';
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AppContext } from "../context";
 import { Types } from "../reducers";
@@ -58,6 +58,11 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
         copy 
       </button>
       <input  className="removeStyles" type="color" onChange={(e)=>{onColorChange(e.currentTarget.value)}} value={state.EquationProps.color}/>
+      
+      <button className={' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeLargeImage);}}>
+        <FontAwesomeIcon icon={faDownload}  style={{width:'20px'}}/>
+      </button>
+
       <button className={largeSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeLargeImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'20px'}}/>
       </button>

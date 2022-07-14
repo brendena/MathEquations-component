@@ -10,6 +10,30 @@ const MathTextInput: React.FC = () => {
     dispatch({type:Types.EQUATION_CHANGED, payload:e.currentTarget.value})
   }
 
+  let fetchHTMLImage = (textHtml:string) =>{
+    var el = document.createElement( 'html' );
+    el.innerHTML = textHtml;
+    let images = el.getElementsByTagName( 'img' );
+    if(images.length == 1)
+    {
+      let imgURL = images[0].src;
+      //check to see if it's a base64 image
+      if(imgURL.substring(0,21) === "data:image/png;base64,"){
+        let data = imgURL.split("base64,");
+        imgURL = "data:application/octet;base64," + data[1];
+      }
+      fetch(images[0].src).then((response)=>{
+          response.arrayBuffer().then((blobArray)=>{
+            const blob8 = new Uint8Array(blobArray);
+            let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
+            console.log(metaData)
+          });  
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+  }
+
   let onDragEnter = (e: DragEvent<HTMLTextAreaElement>)=>{
     e.preventDefault();
     e.currentTarget.classList.add("textInputOnDragEnter")
@@ -22,55 +46,16 @@ const MathTextInput: React.FC = () => {
     e.preventDefault();
     e.currentTarget.classList.remove("textInputOnDragEnter")
     console.log(e.dataTransfer.types);
-    let data = e.dataTransfer.getData("text/html");
-    console.log(data)
-    let el = document.createElement( 'html' );
-    el.innerHTML = data;
-    let imgList = el.getElementsByTagName("img");
-    if(imgList.length > 0)
-    {
-      let img = imgList[0];
-      let data = img.src.split("base64,");
-      fetch("data:application/octet;base64," + data[1]).then(
-        (converted)=>{
-          converted.arrayBuffer().then((buff)=>{
-            let metaData = pngMeta.readMetadata(new Uint8Array(buff));
-            console.log(metaData)
-          })
-        }
-      )
-    }
+
+    fetchHTMLImage(e.dataTransfer.getData("text/html"));
   }
   let onPaste = (e: React.ClipboardEvent)=>{
-    let test =e.clipboardData.getData('text');
-
-    let html =e.clipboardData.getData('text/html');
-    let files =e.clipboardData.getData('Files');
-    let image =e.clipboardData.getData("image/png")
-    console.log(test);
     console.log(e.clipboardData.types)
-    console.log(image)
-    console.log(html);
-    console.log(files)
+
     if(!e.clipboardData.types.includes('text/plain'))
     {
       if(e.clipboardData.types.includes('text/html')){
-        var el = document.createElement( 'html' );
-        el.innerHTML = e.clipboardData.getData('text/html');
-        let images = el.getElementsByTagName( 'img' );
-        if(images.length == 1)
-        {
-          console.log()
-          fetch(images[0].src).then((response)=>{
-            response.blob().then((blob)=>{
-              blob.arrayBuffer().then((blobArray)=>{
-                const blob8 = new Uint8Array(blobArray);
-                let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
-                console.log(metaData)
-              });  
-            });
-          }); 
-        }
+        fetchHTMLImage(e.clipboardData.getData('text/html'));
       }
   
       e.preventDefault();

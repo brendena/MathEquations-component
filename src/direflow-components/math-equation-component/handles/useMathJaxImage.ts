@@ -1,12 +1,11 @@
-import React, {useRef, useState, useContext} from 'react';
-import { EventContext } from 'direflow-component';
+import React, {useRef} from 'react';
 import {Canvg} from "canvg"
 import * as pngMeta from "@nashiinc/png-metadata/index.js"
-import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8,convert_blobToBase64String} from "../library/convert"
+import {convertUint8ToPNGBlob,convertCanvasToPNG_Uint8} from "../library/convert"
 import { AppContext } from "../context";
 import { useMathJaxCopy }  from "./useMathJaxCopy"
 import { useMathJaxDrag } from "./useMathJaxDrag"
-
+import { EquationProps } from '../reducers';
 
 
 function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement, height:number, width:number, lockedHeight:boolean, lockedWidth:boolean, color : string )
@@ -47,7 +46,7 @@ function drawMathJaxToCanvas(mathJax :HTMLDivElement, canvas : HTMLCanvasElement
 }
 
 
-async function convertCanvasToPNG_Blob(canvas : HTMLCanvasElement)
+async function convertCanvasToPNG_Blob(canvas : HTMLCanvasElement, equationProps : EquationProps)
 {
   let pngImage = await convertCanvasToPNG_Uint8(canvas);
   
@@ -58,7 +57,7 @@ async function convertCanvasToPNG_Blob(canvas : HTMLCanvasElement)
 
   //get the metadata then 
   let metaData = pngMeta.readMetadata(pngImage)
-  metaData["tEXt"] = {"test":"shit"}
+  metaData["tEXt"] = equationProps;
   let pngU8 = pngMeta.writeMetadata(pngImage,metaData);
   
   return convertUint8ToPNGBlob(pngU8);
@@ -69,7 +68,6 @@ async function convertCanvasToPNG_Blob(canvas : HTMLCanvasElement)
 
 export function useMathJaxImage()
 {
-    const webComponentDispatch = useContext(EventContext);
     const { state  } = React.useContext(AppContext);
     let mathJaxConRef = useRef<HTMLDivElement>(null);
     let canvasRef = useRef<HTMLCanvasElement>(null);
@@ -84,7 +82,7 @@ export function useMathJaxImage()
       if(mathJaxConRef?.current && canvasRef?.current)
       {
         drawMathJaxToCanvas(mathJaxConRef.current, canvasRef.current, height, width, lockedHeight,lockedWidth, color);
-        const blob = await convertCanvasToPNG_Blob(canvasRef.current);
+        const blob = await convertCanvasToPNG_Blob(canvasRef.current,state.EquationProps);
         return blob;
       }
 

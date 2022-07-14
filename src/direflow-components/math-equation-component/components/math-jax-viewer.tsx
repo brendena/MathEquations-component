@@ -7,6 +7,8 @@ import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
 import { MathTypes } from '../conts/enums';
 import Toolbox from './toolbox';
+import {ErrorBoundary, FallbackProps} from 'react-error-boundary'
+
 
 require("../../../../mathjax/mathJaxCompiled")
 /*
@@ -22,7 +24,6 @@ interface errorMessageState  {
 
 const MathJaxViewer: React.FC = () => {
   const { state  } = React.useContext(AppContext);
-  //const [errorMessage,setErrorMessage] = useState<errorMessageState>({currentText:"",errorMessage:""});
   const {mathJaxConRef,canvasRef,addCanvasToClipboard,onDrag,onMouseDown } = useMathJaxImage();
 
   const error = (err:any) =>{ 
@@ -48,22 +49,14 @@ const MathJaxViewer: React.FC = () => {
       break;
   }
 
-  /*
-  if(errorMessage.errorMessage != "" &&
-    errorMessage.currentText != state.EquationProps.text)
-  {
-    setErrorMessage({currentText:"",errorMessage:""})
-  }
-  */
-
   return (
     <div id="mathJaxViewer"  ref={mathJaxConRef} >
       <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
 
       <div id="mathJaxTextContainer"onMouseDown={onMouseDown} onDragStart={onDrag}  draggable={true} className={"enableDrag"}>
-          <MathJaxContext   renderMode={"pre"} version={3} onError={error} >
-              <MathJax onError={error} typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline > </MathJax>
-          </MathJaxContext>
+        <MathJaxContext   renderMode={"pre"} version={3} onError={error} >
+          <MathJax onError={error} typesettingOptions={{fn:functionType}} text={text} dynamic={true} inline  > </MathJax>
+        </MathJaxContext>
       </div>
 
 
