@@ -7,7 +7,6 @@ import { AppContext } from "../context";
 import { useMathJaxImage } from '../handles/useMathJaxImage';
 import { MathTypes } from '../conts/enums';
 import Toolbox from './toolbox';
-import {ErrorBoundary, FallbackProps} from 'react-error-boundary'
 
 
 require("../../../../mathjax/mathJaxCompiled")

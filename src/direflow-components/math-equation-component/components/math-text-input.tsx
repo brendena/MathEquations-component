@@ -27,6 +27,32 @@ const MathTextInput: React.FC = () => {
             const blob8 = new Uint8Array(blobArray);
             let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
             console.log(metaData)
+            
+            Object.keys(metaData.tEXt).forEach((key:string)=>{
+              switch(key){
+                case "text":
+                  dispatch({type:Types.EQUATION_CHANGED, payload:metaData.tEXt[key]})
+                  break;
+                case "height":
+                  dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:metaData.tEXt[key]})
+                  break;
+                case "lockHeight":
+                  dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload:metaData.tEXt[key]})
+                  break;
+                case "lockWidth":
+                  dispatch({type:Types.CHANGE_WIDTH_LOCK, payload:metaData.tEXt[key]})
+                  break;
+                case "mathType":
+                  dispatch({type:Types.MATH_TYPE_CHANGED, payload:metaData.tEXt[key]})
+                  break;
+                case "width":
+                  dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:metaData.tEXt[key]})
+                  break;
+                case "color":
+                  dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:metaData.tEXt[key]})
+                  break;
+              }
+            });
           });  
       }).catch((error)=>{
         console.log(error)
