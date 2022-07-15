@@ -20,9 +20,20 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
     dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:color})
   }
 
+  let changeImageSize =(defaultSize:number)=>{
+    if(state.EquationProps.lockHeight){
+      dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:defaultSize})
+    }
+    else{
+      dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:defaultSize * 10})
+    }
+  }
+
   let changeHeightImage =(height:number)=>{
+
     dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:height})
   }
+
 
   let changeWidthImage = (width:number)=>{
     dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:width})
@@ -38,12 +49,23 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
   let largeSelected = "";
   let mediumSelected = "";
   let smallSelected = "";
-  if(state.EquationProps.height >= sizeLargeImage){
-    largeSelected = "toolBoxSelected"
-  }else if(state.EquationProps.height >= sizeMediumImage){
-    mediumSelected = "toolBoxSelected"
-  }else{
-    smallSelected = "toolBoxSelected"
+  if(state.EquationProps.lockHeight){
+    if(state.EquationProps.height >= sizeLargeImage){
+      largeSelected = "toolBoxSelected"
+    }else if(state.EquationProps.height >= sizeMediumImage){
+      mediumSelected = "toolBoxSelected"
+    }else{
+      smallSelected = "toolBoxSelected"
+    }
+  }
+  else{
+    if(state.EquationProps.width >= (sizeLargeImage * 10)){
+      largeSelected = "toolBoxSelected"
+    }else if(state.EquationProps.width >= (sizeMediumImage  * 10)){
+      mediumSelected = "toolBoxSelected"
+    }else{
+      smallSelected = "toolBoxSelected"
+    }
   }
 
   let heightLockSelected = "";
@@ -59,17 +81,17 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       </button>
       <input  className="removeStyles" type="color" onChange={(e)=>{onColorChange(e.currentTarget.value)}} value={state.EquationProps.color}/>
       
-      <button className={' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeLargeImage);}}>
+      <button className={' toolbarIcons removeStyles'} onClick={()=>{}}>
         <FontAwesomeIcon icon={faDownload}  style={{width:'20px'}}/>
       </button>
 
-      <button className={largeSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeLargeImage);}}>
+      <button className={largeSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeImageSize(sizeLargeImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'20px'}}/>
       </button>
-      <button className={mediumSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeMediumImage);}}>
+      <button className={mediumSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeImageSize(sizeMediumImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'15px'}} />
       </button>
-      <button className={smallSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeHeightImage(sizeSmallImage);}}>
+      <button className={smallSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeImageSize(sizeSmallImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'10px'}} />
       </button>
       <div style={{"display":"flex", 
@@ -86,9 +108,7 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
             </>    
         }
 
-
-
-        <img src={verticalLock} style={{"maxHeight":"30px"}} className={heightLockSelected} onClick={toggleLockedParam}></img>
+        <img src={verticalLock} style={{"maxHeight":"30px"}} className={heightLockSelected} onClick={toggleLockedParam} alt={"lock vertical width"}></img>
         {state.EquationProps.lockWidth &&
             <>
               <input type="number"
@@ -101,7 +121,7 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
             </>
         }
 
-        <img src={horizontalLock} style={{"maxHeight":"30px"}} className={widthLockSelected} onClick={toggleLockedParam}></img>
+        <img src={horizontalLock} style={{"maxHeight":"30px"}} className={widthLockSelected} onClick={toggleLockedParam} alt={"lock horizontal width"}></img>
       </div>
     </div>
 );

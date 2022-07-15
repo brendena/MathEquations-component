@@ -37,10 +37,10 @@ const MathTextInput: React.FC = () => {
                   dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:metaData.tEXt[key]})
                   break;
                 case "lockHeight":
-                  dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload:metaData.tEXt[key]})
+                dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload: metaData.tEXt[key] === "true" })
                   break;
                 case "lockWidth":
-                  dispatch({type:Types.CHANGE_WIDTH_LOCK, payload:metaData.tEXt[key]})
+                  dispatch({type:Types.CHANGE_WIDTH_LOCK, payload: metaData.tEXt[key] === "true" })
                   break;
                 case "mathType":
                   dispatch({type:Types.MATH_TYPE_CHANGED, payload:metaData.tEXt[key]})
