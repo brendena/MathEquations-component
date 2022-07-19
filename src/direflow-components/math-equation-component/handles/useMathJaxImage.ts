@@ -103,6 +103,7 @@ export function useMathJaxImage()
         canvasRef: canvasRef,
         addCanvasToClipboard: addCanvasToClipboard,
         onDrag: onDrag,
-        onMouseDown: onMouseDown
+        onMouseDown: onMouseDown,
+        createMaxJaxImage: createMaxJaxImage
     };
 }

@@ -9,7 +9,8 @@ import DownloadButton from "./downloadButton"
 
 interface toolboxInterface
 {
-    copyEvent: () => void
+    copyEvent: () => void,
+    generateImage: () => Promise<Blob>
 };
 
 const sizeLargeImage = 100;
@@ -84,7 +85,7 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       </button>
       <input  className="removeStyles" type="color" onChange={(e)=>{onColorChange(e.currentTarget.value)}} value={state.EquationProps.color}/>
       
-      <DownloadButton></DownloadButton>
+      <DownloadButton generateImage={prop.generateImage}></DownloadButton>
 
       <button className={largeSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeImageSize(sizeLargeImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'20px'}}/>

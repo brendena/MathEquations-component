@@ -23,7 +23,7 @@ interface errorMessageState  {
 
 const MathJaxViewer: React.FC = () => {
   const { state  } = React.useContext(AppContext);
-  const {mathJaxConRef,canvasRef,addCanvasToClipboard,onDrag,onMouseDown } = useMathJaxImage();
+  const {mathJaxConRef,canvasRef,addCanvasToClipboard,onDrag,onMouseDown,createMaxJaxImage } = useMathJaxImage();
 
   const error = (err:any) =>{ 
     console.log("############Error"); console.log(err)
@@ -50,7 +50,7 @@ const MathJaxViewer: React.FC = () => {
 
   return (
     <div id="mathJaxViewer"  ref={mathJaxConRef} >
-      <Toolbox copyEvent={addCanvasToClipboard}></Toolbox>
+      <Toolbox copyEvent={addCanvasToClipboard} generateImage={createMaxJaxImage}></Toolbox>
 
       <div id="mathJaxTextContainer"onMouseDown={onMouseDown} onDragStart={onDrag}  draggable={true} className={"enableDrag"}>
         <MathJaxContext   renderMode={"pre"} version={3} onError={error} >
