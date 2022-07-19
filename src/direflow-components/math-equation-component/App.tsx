@@ -22,6 +22,7 @@ interface IProps {
 //pageProp
   copyCustomEvent: boolean;
   orientation: Enums.ORIENTATION;
+  hide: boolean;
 }
 
 const App: FC<IProps> = (props) => {
@@ -54,7 +55,8 @@ App.defaultProps = {
   text:"",
   mathType:Enums.MathTypes.LaTEX,
   copyCustomEvent: false,
-  orientation: Enums.ORIENTATION.BOTTOM
+  orientation: Enums.ORIENTATION.BOTTOM,
+  hide: false
 }
 
 

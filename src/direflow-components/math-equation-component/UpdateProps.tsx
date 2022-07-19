@@ -23,6 +23,7 @@ interface IProps {
 //pageProp
   copyCustomEvent: boolean
   orientation: Enums.ORIENTATION;
+  hide: boolean;
 }
 
 interface Props {
@@ -53,7 +54,10 @@ const UpdateProps: React.FC<Props> = ({props, children }) => {
                 dispatch({type:Types.CHANGE_LAYOUT_ORIENTATION, payload:props.orientation});
             }
             if(localProps.copyCustomEvent !== props.copyCustomEvent && props.copyCustomEvent !== undefined){
-                dispatch({type:Types.CHANGE_UI_HIDE, payload:props.copyCustomEvent});
+                dispatch({type:Types.SET_COPY_CUSTOM_EVENT, payload:props.copyCustomEvent});
+            }
+            if(localProps.hide !== props.hide && props.hide !== undefined){
+                dispatch({type:Types.CHANGE_UI_HIDE, payload:props.hide});
             }
             console.log(props)
             setLocalProps(props);

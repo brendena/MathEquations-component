@@ -40,7 +40,6 @@ const MathEquationComponent: React.FC = () => {
 
 
   let turnPointEventsToNone = ( e:any)=>{
-    console.log(e.target)
     e.target.style.pointerEvents = "none";
   }
 

@@ -22,7 +22,8 @@ type ActionMap<M extends { [index: string]: any }> = {
     CHANGE_EQUATION_HEIGHT = "CHANGE_EQUATION_HEIGHT",
     CHANGE_EQUATION_WIDTH = "CHANGE_EQUATION_WIDTH",
     CHANGE_HEIGHT_LOCK = "CHANGE_HEIGHT_LOCK",
-    CHANGE_WIDTH_LOCK = "CHANGE_WIDTH_LOCK"  
+    CHANGE_WIDTH_LOCK = "CHANGE_WIDTH_LOCK",
+    SET_COPY_CUSTOM_EVENT = "SET_COPY_CUSTOM_EVENT"
   }
   
   // pageProp
@@ -37,7 +38,8 @@ type ActionMap<M extends { [index: string]: any }> = {
   type pagePropPayload = {
     [Types.CHANGE_LAYOUT_ORIENTATION]: Enums.ORIENTATION;
     [Types.CHANGE_UI_HIDE]: boolean,
-    [Types.CHANGE_SETTINGS_HIDE]: boolean
+    [Types.CHANGE_SETTINGS_HIDE]: boolean,
+    [Types.SET_COPY_CUSTOM_EVENT]: boolean
   };
   
   export type pagePropActions = ActionMap<pagePropPayload>[keyof ActionMap<
@@ -64,6 +66,11 @@ type ActionMap<M extends { [index: string]: any }> = {
         return {
           ...state,
           hideSettingsUI: action.payload
+        }
+      case Types.SET_COPY_CUSTOM_EVENT:
+        return {
+          ...state,
+          copyCustomEvent: action.payload
         }
       default:
         return state;
