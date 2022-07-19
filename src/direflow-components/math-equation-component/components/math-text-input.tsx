@@ -18,7 +18,7 @@ const MathTextInput: React.FC = () => {
     {
       let imgURL = images[0].src;
       //check to see if it's a base64 image
-      if(imgURL.substring(0,21) === "data:image/png;base64,"){
+      if(imgURL.substring(0,21) === "data:image/png;base64"){
         let data = imgURL.split("base64,");
         imgURL = "data:application/octet;base64," + data[1];
       }
@@ -27,32 +27,36 @@ const MathTextInput: React.FC = () => {
             const blob8 = new Uint8Array(blobArray);
             let metaData = pngMeta.readMetadata(new Uint8Array(blob8));
             console.log(metaData)
-            
-            Object.keys(metaData.tEXt).forEach((key:string)=>{
-              switch(key){
-                case "text":
-                  dispatch({type:Types.EQUATION_CHANGED, payload:metaData.tEXt[key]})
-                  break;
-                case "height":
-                  dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:metaData.tEXt[key]})
-                  break;
-                case "lockHeight":
-                dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload: metaData.tEXt[key] === "true" })
-                  break;
-                case "lockWidth":
-                  dispatch({type:Types.CHANGE_WIDTH_LOCK, payload: metaData.tEXt[key] === "true" })
-                  break;
-                case "mathType":
-                  dispatch({type:Types.MATH_TYPE_CHANGED, payload:metaData.tEXt[key]})
-                  break;
-                case "width":
-                  dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:metaData.tEXt[key]})
-                  break;
-                case "color":
-                  dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:metaData.tEXt[key]})
-                  break;
-              }
-            });
+            if(metaData.tEXt != null){
+              Object.keys(metaData.tEXt).forEach((key:string)=>{
+                switch(key){
+                  case "text":
+                    dispatch({type:Types.EQUATION_CHANGED, payload:metaData.tEXt[key]})
+                    break;
+                  case "height":
+                    dispatch({type:Types.CHANGE_EQUATION_HEIGHT, payload:metaData.tEXt[key]})
+                    break;
+                  case "lockHeight":
+                  dispatch({type:Types.CHANGE_HEIGHT_LOCK, payload: metaData.tEXt[key] === "true" })
+                    break;
+                  case "lockWidth":
+                    dispatch({type:Types.CHANGE_WIDTH_LOCK, payload: metaData.tEXt[key] === "true" })
+                    break;
+                  case "mathType":
+                    dispatch({type:Types.MATH_TYPE_CHANGED, payload:metaData.tEXt[key]})
+                    break;
+                  case "width":
+                    dispatch({type:Types.CHANGE_EQUATION_WIDTH, payload:metaData.tEXt[key]})
+                    break;
+                  case "color":
+                    dispatch({type:Types.CHANGE_EQUATION_COLOR, payload:metaData.tEXt[key]})
+                    break;
+                }
+              });
+            }
+            else{
+              //there is not extension
+            }
           });  
       }).catch((error)=>{
         console.log(error)

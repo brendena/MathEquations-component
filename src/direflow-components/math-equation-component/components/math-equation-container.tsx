@@ -11,7 +11,9 @@ import SettingUI from './settingUI';
 
 const MathEquationComponent: React.FC = () => {
   let ref = useRef(null);
-  let {mouseResizeStart} = useMouseMove(ref);
+  let appSpacerRef = useRef(null);
+
+  let {mouseResizeStart} = useMouseMove(ref,appSpacerRef);
   const { state  } = React.useContext(AppContext);
 
   let verticalUI = false;
@@ -37,10 +39,15 @@ const MathEquationComponent: React.FC = () => {
   }
 
 
+  let turnPointEventsToNone = ( e:any)=>{
+    console.log(e.target)
+    e.target.style.pointerEvents = "none";
+  }
+
   return (
     <> 
 
-      <div id="appSpacer"></div>
+      <div id="appSpacer" ref={appSpacerRef} onClick={turnPointEventsToNone}></div>
       <input id="V" type="checkbox" checked={verticalUI} hidden></input> 
       <input id="L" type="checkbox" checked={leftUI}     hidden></input>
         

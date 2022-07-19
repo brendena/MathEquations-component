@@ -3,3 +3,9 @@ context using - https://dev.to/elisealcala/react-context-with-usereducer-and-typ
 
 convert your svg's to base 64's 
 https://codebeautify.org/svg-to-base64-converter
+
+
+
+
+Features that allowed png meta to work in clipboard
+https://chromestatus.com/feature/5629962485760000

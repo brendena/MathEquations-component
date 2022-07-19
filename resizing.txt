@@ -1,0 +1,3 @@
+## how reszing the component works
+
+the width of the variable is controlled via a css variable.  What changes the components size is a onmouse event on the slider icon which adds a mousemove on the document.  The problem is that since this is a webcomponent the document is limited to the scope of the component.  So i added a spacer that's the entire width and height of the document.  To make sure it works on everthing i have a pointer-event thats normal none, but to make sure the mouse move event works i turn it to auto when your start reszing the extension.

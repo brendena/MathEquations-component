@@ -6,14 +6,17 @@ import * as Enums from "../conts/enums"
 
 
 
-export function useMouseMove(ref: React.MutableRefObject<null>)
+export function useMouseMove(ref: React.MutableRefObject<null>, spacer: React.MutableRefObject<null>)
 {
   const { state  } = React.useContext(AppContext);
 
   const mouseMove = (pos : MouseEvent)=>{
     let current : any = ref.current
+    let appSpacer :any = spacer.current;
     if(current  != null)
     {
+      appSpacer.style.pointerEvents = "auto";
+
       let widthOrHeight = 0;
       let addAmount = 0;
       
@@ -33,6 +36,10 @@ export function useMouseMove(ref: React.MutableRefObject<null>)
     document.body.addEventListener("mousemove", mouseMove)
     document.body.addEventListener("mouseup", ()=>{
       document.body.removeEventListener("mousemove",mouseMove,false);
+      let appSpacer :any = spacer.current;
+      if(appSpacer){
+        appSpacer.style.pointerEvents = "none";
+      }
     }, {"once": true});
   }
   

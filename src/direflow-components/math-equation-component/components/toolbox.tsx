@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AppContext } from "../context";
 import { Types } from "../reducers";
 import { horizontalLock, verticalLock } from "../conts/base64Images";
+import DownloadButton from "./downloadButton"
+
+
 interface toolboxInterface
 {
     copyEvent: () => void
@@ -81,9 +84,7 @@ const Toolbox: React.FC<toolboxInterface> = (prop) => {
       </button>
       <input  className="removeStyles" type="color" onChange={(e)=>{onColorChange(e.currentTarget.value)}} value={state.EquationProps.color}/>
       
-      <button className={' toolbarIcons removeStyles'} onClick={()=>{}}>
-        <FontAwesomeIcon icon={faDownload}  style={{width:'20px'}}/>
-      </button>
+      <DownloadButton></DownloadButton>
 
       <button className={largeSelected + ' toolbarIcons removeStyles'} onClick={()=>{changeImageSize(sizeLargeImage);}}>
         <FontAwesomeIcon icon={faImage}  style={{width:'20px'}}/>
